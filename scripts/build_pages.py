@@ -521,7 +521,7 @@ CONTACT = r"""
     </header>
 
     <section>
-      <div class="wrap two-col">
+      <div class="wrap contact-grid">
         <div>
           <h2>Inquiries</h2>
           <p>Use the official WashU pages below. We have not posted a public email on this members-only site yet.</p>
@@ -530,14 +530,25 @@ CONTACT = r"""
             <li><a href="https://profiles.wustl.edu/en/persons/mengcheng-shen">profiles.wustl.edu/en/persons/mengcheng-shen</a></li>
             <li><a href="https://orcid.org/0000-0001-7037-6159">ORCID 0000-0001-7037-6159</a></li>
           </ul>
-        </div>
-        <div>
           <h2>Location</h2>
-          <p>Washington University School of Medicine<br>Division of Cardiology<br>Center for Cardiovascular Research<br>St. Louis, Missouri</p>
+          <p>The Cardiovascular Division administrative offices are on the WashU Medical Center campus:</p>
+          <p>
+            WashU Medical Center<br>
+            4940 Parkview Place<br>
+            St. Louis, MO 63110
+          </p>
+          <p><a href="https://maps.google.com/?q=4940+Parkview+Place,+St.+Louis,+MO+63110">Open in Google Maps</a></p>
           <div class="affiliations">
             <img class="logo-washu" src="assets/img/washu-medicine.svg" alt="WashU Medicine">
             <img class="logo-cvr" src="assets/img/cvr-center.png" alt="Center for Cardiovascular Research">
           </div>
+        </div>
+        <div class="map-embed">
+          <iframe title="Map of WashU Medical Center, 4940 Parkview Place, St. Louis"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3116.4!2d-90.2638319!3d38.6382822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87d8b4c6%3A0x0!2s4940%20Parkview%20Place%2C%20St.%20Louis%2C%20MO%2063110!5e0!3m2!1sen!2sus!4v1710000000000!5m2!1sen!2sus"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen></iframe>
         </div>
       </div>
     </section>
