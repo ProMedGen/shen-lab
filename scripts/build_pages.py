@@ -40,7 +40,6 @@ def page(active: str, title: str, description: str, body: str) -> str:
 </head>
 <body>
   <a class="skip" href="#content">Skip to content</a>
-  <div class="banner">Members-only preview for <strong>ProMedGen</strong> · Cardiovascular Precision Medicine Lab</div>
   <header class="site-header">
     <div class="header-top">
       <a class="brand" href="index.html">
