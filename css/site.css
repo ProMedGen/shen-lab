@@ -723,29 +723,51 @@ section {
 }
 
 .figure-card {
+  display: flex;
+  flex-direction: column;
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: 16px;
   overflow: hidden;
+  height: auto;
 }
 
 .figure-card img,
 .figure-card video {
+  display: block;
   width: 100%;
+  height: auto;
   background: var(--stage);
 }
 
+.figure-card .media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--stage);
+}
+
+.figure-card .media video {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 28rem;
+}
+
 .figure-card figcaption {
+  flex: 0 0 auto;
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 0.78rem;
   color: var(--muted);
-  padding: 0.75rem 1rem 0.95rem;
+  padding: 0.65rem 0.9rem 0.8rem;
+  line-height: 1.4;
 }
 
 .gallery {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
+  align-items: start;
 }
 
 .topic {
@@ -1409,6 +1431,10 @@ h2.year {
 
   .map-embed-large iframe {
     height: 520px;
+  }
+
+  .figure-card .media video {
+    max-height: 22rem;
   }
 }
 

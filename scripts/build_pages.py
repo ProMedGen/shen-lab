@@ -351,28 +351,36 @@ MODELS = r"""
         <h2>Beating cells and tissues</h2>
         <div class="gallery">
           <figure class="figure-card">
-            <video controls playsinline poster="assets/img/cm-beating-poster.jpg">
-              <source src="assets/video/cm-beating.mp4" type="video/mp4">
-            </video>
+            <div class="media">
+              <video controls playsinline poster="assets/img/cm-beating-poster.jpg">
+                <source src="assets/video/cm-beating.mp4" type="video/mp4">
+              </video>
+            </div>
             <figcaption>iPSC-cardiomyocytes, brightfield beating culture.</figcaption>
           </figure>
           <figure class="figure-card">
-            <video controls playsinline>
-              <source src="assets/video/cm-myl7.mp4" type="video/mp4">
-            </video>
+            <div class="media">
+              <video controls playsinline>
+                <source src="assets/video/eht-myl7.mp4" type="video/mp4">
+              </video>
+            </div>
+            <figcaption>iPSC-engineered heart tissues, MYL7-eGFP.</figcaption>
+          </figure>
+          <figure class="figure-card">
+            <div class="media">
+              <video controls playsinline>
+                <source src="assets/video/cm-myl7.mp4" type="video/mp4">
+              </video>
+            </div>
             <figcaption>iPSC-cardiomyocytes, MYL7 (green) beating reporter.</figcaption>
           </figure>
           <figure class="figure-card">
-            <video controls playsinline>
-              <source src="assets/video/eht-brightfield.mp4" type="video/mp4">
-            </video>
+            <div class="media">
+              <video controls playsinline>
+                <source src="assets/video/eht-brightfield.mp4" type="video/mp4">
+              </video>
+            </div>
             <figcaption>iPSC-engineered heart tissues, brightfield.</figcaption>
-          </figure>
-          <figure class="figure-card">
-            <video controls playsinline>
-              <source src="assets/video/eht-myl7.mp4" type="video/mp4">
-            </video>
-            <figcaption>iPSC-engineered heart tissues, MYL7-eGFP.</figcaption>
           </figure>
         </div>
       </div>
@@ -415,15 +423,19 @@ MODELS = r"""
         <h2>Organoids</h2>
         <div class="gallery">
           <figure class="figure-card">
-            <video controls playsinline poster="assets/img/cardiac-organoid-poster.jpg">
-              <source src="assets/video/cardiac-organoids.mp4" type="video/mp4">
-            </video>
+            <div class="media">
+              <video controls playsinline poster="assets/img/cardiac-organoid-poster.jpg">
+                <source src="assets/video/cardiac-organoids.mp4" type="video/mp4">
+              </video>
+            </div>
             <figcaption>iPSC-cardiac organoids.</figcaption>
           </figure>
           <figure class="figure-card">
-            <video controls playsinline>
-              <source src="assets/video/vascularized-organoids.mp4" type="video/mp4">
-            </video>
+            <div class="media">
+              <video controls playsinline>
+                <source src="assets/video/vascularized-organoids.mp4" type="video/mp4">
+              </video>
+            </div>
             <figcaption>iPSC-vascularized cardiac organoids.</figcaption>
           </figure>
           <figure class="figure-card">
@@ -431,9 +443,11 @@ MODELS = r"""
             <figcaption>iPSC-vessel organoid · DAPI | VE-cadherin | CD31 | PDGFRβ.</figcaption>
           </figure>
           <figure class="figure-card">
-            <video controls playsinline>
-              <source src="assets/video/vessel-organoids.mp4" type="video/mp4">
-            </video>
+            <div class="media">
+              <video controls playsinline>
+                <source src="assets/video/vessel-organoids.mp4" type="video/mp4">
+              </video>
+            </div>
             <figcaption>iPSC-vessel organoids · CD31 (magenta), PDGFRβ (yellow), collagen IV (cyan).</figcaption>
           </figure>
         </div>
@@ -445,15 +459,19 @@ MODELS = r"""
         <h2>Lab spaces</h2>
         <div class="gallery">
           <figure class="figure-card">
-            <video controls playsinline poster="assets/img/lab-space.jpg">
-              <source src="assets/video/lab-space.mp4" type="video/mp4">
-            </video>
+            <div class="media">
+              <video controls playsinline poster="assets/img/lab-space.jpg">
+                <source src="assets/video/lab-space.mp4" type="video/mp4">
+              </video>
+            </div>
             <figcaption>Laboratory space.</figcaption>
           </figure>
           <figure class="figure-card">
-            <video controls playsinline poster="assets/img/tissue-culture.jpg">
-              <source src="assets/video/tissue-culture.mp4" type="video/mp4">
-            </video>
+            <div class="media">
+              <video controls playsinline poster="assets/img/tissue-culture.jpg">
+                <source src="assets/video/tissue-culture.mp4" type="video/mp4">
+              </video>
+            </div>
             <figcaption>Tissue culture room.</figcaption>
           </figure>
         </div>
