@@ -12,6 +12,7 @@ PAGES = [
     "research.html",
     "models.html",
     "publications.html",
+    "news.html",
     "people.html",
     "join.html",
     "contact.html",
@@ -54,7 +55,7 @@ def main() -> None:
         page.goto(f"{BASE}/index.html", wait_until="domcontentloaded")
         if MISSION not in page.inner_text("main"):
             problems.append("home is missing the lab mission paragraph")
-        for label in ["Research", "Models", "Publications", "People", "Join", "Contact"]:
+        for label in ["Research", "Models", "Publications", "News", "People", "Join", "Contact"]:
             page.get_by_role("navigation").get_by_role("link", name=label, exact=True).click()
             page.wait_for_load_state("domcontentloaded")
         page.set_viewport_size({"width": 390, "height": 844})

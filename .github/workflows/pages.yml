@@ -28,7 +28,7 @@ jobs:
       - name: Stage site files
         run: |
           mkdir _site
-          cp index.html research.html models.html people.html join.html publications.html contact.html 404.html .nojekyll robots.txt _site/
+          cp index.html research.html models.html people.html join.html publications.html news.html contact.html 404.html .nojekyll robots.txt _site/
           cp -R css js assets _site/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

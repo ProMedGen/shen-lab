@@ -12,6 +12,7 @@ NAV = [
     ("research.html", "Research"),
     ("models.html", "Models"),
     ("publications.html", "Publications"),
+    ("news.html", "News"),
     ("people.html", "People"),
     ("join.html", "Join"),
     ("contact.html", "Contact"),
@@ -156,6 +157,8 @@ HOME = r"""
         </div>
       </div>
     </section>
+
+    <!--NEWS_TEASER-->
 
     <section>
       <div class="wrap">
@@ -709,6 +712,72 @@ def _venue(paper: dict) -> str:
     return f"{journal}. {year}."
 
 
+def load_news() -> list:
+    items = json.loads((ROOT / "data" / "news.json").read_text(encoding="utf-8"))
+    return sorted(items, key=lambda item: item["date"], reverse=True)
+
+
+def _news_card(item: dict) -> str:
+    title = html.escape(item["title"])
+    summary = html.escape(item["summary"])
+    source = html.escape(item["source"])
+    kind = html.escape(item["kind"])
+    date = html.escape(item["display_date"])
+    url = html.escape(item["url"], quote=True)
+    return f"""
+        <article class="news-item">
+          <div class="news-meta">
+            <p class="news-date">{date}</p>
+            <p class="news-kind">{kind}</p>
+          </div>
+          <div>
+            <h3><a href="{url}">{title}</a></h3>
+            <p>{summary}</p>
+            <p class="news-source">{source}</p>
+          </div>
+        </article>"""
+
+
+def build_news_teaser() -> str:
+    items = load_news()[:3]
+    cards = "".join(_news_card(item) for item in items)
+    return f"""
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">News</p>
+          <h2>Lab news and coverage</h2>
+          <p>Institutional announcements, awards, and press on Dr. Shen's work. <a href="news.html">All news</a>.</p>
+        </div>
+        <div class="news-list">{cards}
+        </div>
+      </div>
+    </section>
+"""
+
+
+def build_news() -> str:
+    items = load_news()
+    cards = "".join(_news_card(item) for item in items)
+    return f"""
+    <header class="masthead mast-news">
+      <div class="wrap">
+        <p class="kicker">News</p>
+        <h1>Lab news and media</h1>
+        <p class="lede">Documented awards, institutional announcements, and press coverage of Dr. Shen's work. Named team-member news will be added as people join.</p>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap">
+        <div class="news-list">{cards}
+        </div>
+        <p class="team-note">Send a link if we missed coverage of the lab or of a team member. Papers themselves stay on <a href="publications.html">Publications</a>.</p>
+      </div>
+    </section>
+"""
+
+
 def build_publications() -> str:
     papers = json.loads((ROOT / "data" / "publications.json").read_text(encoding="utf-8"))
     by_year: dict[int, list] = defaultdict(list)
@@ -780,7 +849,7 @@ def main() -> None:
             "index.html",
             "Shen Lab · Cardiovascular Precision Medicine",
             "Cardiovascular Precision Medicine Lab at WashU Medicine, led by Mengcheng Shen, PhD.",
-            HOME,
+            HOME.replace("    <!--NEWS_TEASER-->\n", build_news_teaser()),
         ),
         "research.html": (
             "research.html",
@@ -817,6 +886,12 @@ def main() -> None:
             "Publications · Shen Lab",
             "Publications from the Shen Lab and collaborators.",
             build_publications(),
+        ),
+        "news.html": (
+            "news.html",
+            "News · Shen Lab",
+            "Lab news, awards, and media coverage of Mengcheng Shen and the Shen Lab.",
+            build_news(),
         ),
     }
     extra = {

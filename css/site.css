@@ -996,6 +996,73 @@ nav.year-nav a:focus {
   background-image: url("../assets/img/endothelial-protocol.jpg");
 }
 
+.mast-news {
+  background-image: url("../assets/img/lab-space.jpg");
+}
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.news-item {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: 0.85rem 1.4rem;
+  align-items: start;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.news-date {
+  margin: 0 0 0.35rem;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.82rem;
+  color: var(--red);
+}
+
+.news-kind {
+  margin: 0;
+  display: inline-block;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: #eef2fa;
+  border-radius: 999px;
+  padding: 0.18rem 0.55rem;
+}
+
+.news-item h3 {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 1.12rem;
+  font-style: normal;
+  font-weight: 650;
+  margin: 0 0 0.4rem;
+}
+
+.news-item h3 a {
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.news-item h3 a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+.news-item p {
+  margin: 0 0 0.45rem;
+  color: #3a4354;
+}
+
+.news-source {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
 .two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1202,6 +1269,11 @@ h2.year {
     font-size: 1.05rem;
     min-width: 4rem;
     padding: 0.32rem 0.55rem;
+  }
+
+  .news-item {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
   }
 }
 

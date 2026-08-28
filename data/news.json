@@ -1,0 +1,42 @@
+[
+  {
+    "date": "2026-03-02",
+    "display_date": "March 2026",
+    "kind": "Award",
+    "title": "ICTS awards a CTRFP grant for CRISPR screens in pulmonary arterial hypertension",
+    "summary": "Dr. Shen is a 2026–2027 Clinical and Translational Research Funding Program awardee. The project, Druggable CRISPR Screens to Identify Novel Regulators in Pulmonary Arterial Hypertension, uses patient-derived stem-cell vessel models and CRISPR to find genes that drive the disease.",
+    "source": "WashU Institute of Clinical and Translational Sciences",
+    "url": "https://icts.wustl.edu/icts-announces-2026-2027-ctrfp-awardees/",
+    "people": ["Mengcheng Shen"]
+  },
+  {
+    "date": "2025-05-01",
+    "display_date": "May 2025",
+    "kind": "Lab news",
+    "title": "Dr. Mengcheng Shen joins the Department of Medicine",
+    "summary": "Dr. Shen joined the Cardiovascular Division as an Assistant Professor in May 2025 after postdoctoral training and an instructorship at the Stanford Cardiovascular Institute. The announcement also notes the 2023 NHLBI K99/R00 Pathway to Independence Award.",
+    "source": "WashU Department of Medicine",
+    "url": "https://internalmedicine.wustl.edu/dr-mengcheng-shen-joins-the-department-of-medicine/",
+    "people": ["Mengcheng Shen"]
+  },
+  {
+    "date": "2023-05-08",
+    "display_date": "May 2023",
+    "kind": "Media",
+    "title": "Researchers solve mystery of how statins improve blood vessel health",
+    "summary": "Stanford Medicine coverage of a Nature Cardiovascular Research paper on how simvastatin represses endothelial-to-mesenchymal transition. Mengcheng Shen, then a Stanford CVI postdoctoral scholar, is a co-lead author with Chun Liu and Wilson Tan. Senior author: Joseph C. Wu.",
+    "source": "Stanford Medicine",
+    "url": "https://med.stanford.edu/news/all-news/2023/05/statins-cardiovascular-vessels.html",
+    "people": ["Mengcheng Shen"]
+  },
+  {
+    "date": "2023-05-05",
+    "display_date": "May 2023",
+    "kind": "Award",
+    "title": "NHLBI K99/R00 Pathway to Independence Award",
+    "summary": "NIH NHLBI awarded 1K99HL166693, Elucidating anti-angiogenic tyrosine kinase inhibitor-induced vascular dysfunction, to Mengcheng Shen at Stanford University.",
+    "source": "NIH RePORTER",
+    "url": "https://reporter.nih.gov/project-details/10570393",
+    "people": ["Mengcheng Shen"]
+  }
+]
