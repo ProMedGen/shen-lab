@@ -715,7 +715,7 @@ def build_publications() -> str:
     for paper in papers:
         by_year[paper["year"]].append(paper)
     years = sorted(by_year, reverse=True)
-    jumps = " · ".join(f'<a href="#y{year}">{year}</a>' for year in years)
+    jumps = "".join(f'<a href="#y{year}">{year}</a>' for year in years)
     blocks = []
     for year in years:
         rows = []
