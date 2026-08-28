@@ -100,7 +100,7 @@ def still_from_video(src_name: str, dest_name: str, at: float = 2.0) -> None:
 
 def main() -> None:
     convert_image("Shen Lab Logo_Small.tiff", "logo.png", kind="logo", max_w=900)
-    convert_image("WashU Medicine.png", "washu-medicine.png", kind="logo-banner", max_w=720)
+    # WashU Medicine lockup: use official SVG from medicine.washu.edu, not the folder raster.
     convert_image("Center For Cardiovascular Research.png", "cvr-center.png", kind="logo", max_w=560)
     convert_image("Headshot_Mengcheng Shen.png", "headshot.jpg", max_w=900)
     convert_image("Lab research focus.png", "research-overview.jpg", max_w=2000)

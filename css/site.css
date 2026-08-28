@@ -732,9 +732,16 @@ section {
 }
 
 .affiliations img {
-  height: 48px;
   width: auto;
-  background: #fff;
+  background: transparent;
+}
+
+.logo-washu {
+  height: 36px;
+}
+
+.logo-cvr {
+  height: 44px;
 }
 
 .contact-list {

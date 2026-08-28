@@ -72,8 +72,8 @@ def page(active: str, title: str, description: str, body: str) -> str:
       </div>
       <div>
         <div class="affiliations">
-          <img src="assets/img/washu-medicine.png" alt="WashU Medicine">
-          <img src="assets/img/cvr-center.png" alt="Center for Cardiovascular Research">
+          <img class="logo-washu" src="assets/img/washu-medicine.svg" alt="WashU Medicine">
+          <img class="logo-cvr" src="assets/img/cvr-center.png" alt="Center for Cardiovascular Research">
         </div>
       </div>
     </div>
@@ -532,8 +532,8 @@ CONTACT = r"""
           <h2>Location</h2>
           <p>Washington University School of Medicine<br>Division of Cardiology<br>Center for Cardiovascular Research<br>St. Louis, Missouri</p>
           <div class="affiliations">
-            <img src="assets/img/washu-medicine.png" alt="WashU Medicine">
-            <img src="assets/img/cvr-center.png" alt="Center for Cardiovascular Research">
+            <img class="logo-washu" src="assets/img/washu-medicine.svg" alt="WashU Medicine">
+            <img class="logo-cvr" src="assets/img/cvr-center.png" alt="Center for Cardiovascular Research">
           </div>
         </div>
       </div>
