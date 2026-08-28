@@ -947,7 +947,7 @@ def build_publications() -> str:
       <div class="wrap">
         <p class="kicker">Publications</p>
         <h1>Publications</h1>
-        <p class="lede">{len(papers)} papers, grouped by year. Lab member <strong>Shen M</strong> is in bold. Altmetric and Dimensions badges load when those services have a record for the DOI.</p>
+        <p class="lede">Papers from the lab and collaborators.</p>
       </div>
     </header>
 
