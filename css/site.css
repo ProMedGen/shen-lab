@@ -510,6 +510,204 @@ section {
   padding: 0.22rem 0.6rem;
 }
 
+.pi-title {
+  margin: 0 0 0.7rem;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.cv-band {
+  background: var(--white);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.cv-honors-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.4rem 3rem;
+  align-items: start;
+  min-width: 0;
+}
+
+.cv-list,
+.honors-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cv-list li,
+.honors-list li {
+  display: grid;
+  grid-template-columns: 6.4rem minmax(0, 1fr);
+  gap: 0.85rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--line);
+  min-width: 0;
+}
+
+.cv-list li:last-child,
+.honors-list li:last-child {
+  border-bottom: 0;
+}
+
+.cv-years,
+.honor-year {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: var(--red);
+  padding-top: 0.12rem;
+}
+
+.cv-list strong,
+.honor-name {
+  display: block;
+  color: var(--navy);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.cv-list li > div,
+.honor-name,
+.honor-feature h3,
+.cv-list p {
+  min-width: 0;
+  overflow-wrap: break-word;
+}
+
+.cv-list p {
+  margin: 0.2rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.cv-stanford {
+  background: linear-gradient(90deg, rgba(200, 16, 46, 0.06), transparent 55%);
+  margin: 0 -0.7rem;
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
+  border-left: 3px solid var(--red);
+}
+
+.cv-stanford + .cv-stanford {
+  border-top: 0;
+}
+
+.honor-feature {
+  background: #f8f1f2;
+  border: 1px solid #ead4d8;
+  border-left: 4px solid var(--red);
+  border-radius: 12px;
+  padding: 1rem 1.1rem 1.05rem;
+  margin: 0 0 1rem;
+  min-width: 0;
+}
+
+.honor-feature .kicker {
+  margin-bottom: 0.35rem;
+}
+
+.honor-feature h3 {
+  font-size: 1.15rem;
+  margin: 0 0 0.3rem;
+}
+
+.honor-feature p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.honor-name {
+  font-weight: 600;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr));
+  gap: 1rem;
+}
+
+.person-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  min-width: 0;
+}
+
+.person-card img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.person-body {
+  padding: 0.85rem 0.9rem 1rem;
+  min-width: 0;
+}
+
+.person-role {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin: 0 0 0.3rem;
+}
+
+.person-card h3 {
+  font-size: 1.05rem;
+  margin: 0 0 0.25rem;
+}
+
+.person-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.person-mark {
+  aspect-ratio: 4 / 5;
+  display: grid;
+  place-items: center;
+  background: #eef2fa;
+  color: var(--navy);
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.person-card-open {
+  border-style: dashed;
+  background: #fbfcfe;
+}
+
+.person-card-open:hover {
+  border-color: var(--blue);
+  color: inherit;
+}
+
+.person-card-open:hover .person-mark {
+  background: #e4ecf8;
+}
+
+.person-card-open:hover h3 {
+  color: var(--blue);
+}
+
+.team-note {
+  margin: 1.3rem 0 0;
+}
+
 .prose {
   max-width: 46rem;
 }
@@ -907,8 +1105,44 @@ section {
   .pub-grid,
   .pub-row,
   .two-col,
-  .contact-grid {
+  .contact-grid,
+  .cv-honors-grid {
     grid-template-columns: 1fr;
+  }
+
+  .cv-list li,
+  .honors-list li {
+    grid-template-columns: 1fr;
+    gap: 0.2rem;
+  }
+
+  .cv-years,
+  .honor-year {
+    padding-top: 0;
+  }
+
+  .cv-stanford {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .pi img {
+    max-width: 240px;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .person-role {
+    letter-spacing: 0.04em;
+  }
+
+  .person-card h3,
+  .person-card p,
+  .honor-feature h3,
+  .honor-name {
+    overflow-wrap: anywhere;
   }
 
   .pub-metrics {
