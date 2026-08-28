@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Generate static HTML pages for the Shen Lab website."""
 
+import html
+import json
+from collections import defaultdict
 from pathlib import Path
 
 ROOT = Path("/Volumes/CrucialX10A/Apps/Website/Shen_Lab")
@@ -23,7 +26,7 @@ def nav_html(active: str) -> str:
     return "\n".join(items)
 
 
-def page(active: str, title: str, description: str, body: str) -> str:
+def page(active: str, title: str, description: str, body: str, extra_scripts: str = "") -> str:
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,6 +81,7 @@ def page(active: str, title: str, description: str, body: str) -> str:
     </div>
   </footer>
   <script src="js/site.js"></script>
+{extra_scripts}
 </body>
 </html>
 """
@@ -539,122 +543,94 @@ CONTACT = r"""
     </section>
 """
 
-PUBLICATIONS = r"""
+def _authors_html(names: list[str]) -> str:
+    bits = []
+    for name in names:
+        if name == "Shen M":
+            bits.append(f"<strong>{html.escape(name)}</strong>")
+        else:
+            bits.append(html.escape(name))
+    return ", ".join(bits)
+
+
+def _venue(paper: dict) -> str:
+    journal = html.escape(paper["journal"])
+    year = paper["year"]
+    loc = paper.get("volume") or ""
+    if loc and paper.get("issue"):
+        loc += f"({paper['issue']})"
+    if loc and paper.get("pages"):
+        loc += f":{html.escape(paper['pages'])}"
+    elif paper.get("pages"):
+        loc = html.escape(paper["pages"])
+    if loc:
+        return f"{journal}. {year}; {loc}."
+    return f"{journal}. {year}."
+
+
+def build_publications() -> str:
+    papers = json.loads((ROOT / "data" / "publications.json").read_text(encoding="utf-8"))
+    by_year: dict[int, list] = defaultdict(list)
+    for paper in papers:
+        by_year[paper["year"]].append(paper)
+    years = sorted(by_year, reverse=True)
+    jumps = " · ".join(f'<a href="#y{year}">{year}</a>' for year in years)
+    blocks = []
+    for year in years:
+        rows = []
+        for paper in by_year[year]:
+            doi = paper.get("doi") or ""
+            pmid = paper["pmid"]
+            title = html.escape(paper["title"])
+            title_html = (
+                f'<a href="https://doi.org/{html.escape(doi)}">{title}</a>' if doi else title
+            )
+            chips = []
+            if doi:
+                chips.append(f'<a class="chip" href="https://doi.org/{html.escape(doi)}">DOI</a>')
+            chips.append(f'<a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/{pmid}/">PubMed</a>')
+            metrics = ""
+            if doi:
+                metrics = f"""
+          <div class="pub-metrics">
+            <div class="altmetric-embed" data-badge-type="donut" data-doi="{html.escape(doi)}" data-hide-no-mentions="true" data-link-target="_blank"></div>
+            <span class="__dimensions_badge_embed__" data-doi="{html.escape(doi)}" data-hide-zero-citations="true" data-style="small_circle" data-legend="hover-right"></span>
+          </div>"""
+            rows.append(
+                f"""
+        <article class="pub-row">
+          <div class="pub-main">
+            <h3>{title_html}</h3>
+            <p class="pub-authors">{_authors_html(paper["authors"])}</p>
+            <p class="pub-venue">{_venue(paper)}</p>
+            <div class="chips">{"".join(chips)}</div>
+          </div>{metrics}
+        </article>"""
+            )
+        blocks.append(
+            f"""
+      <h2 class="year" id="y{year}">{year}</h2>
+      <div class="pub-list">{"".join(rows)}
+      </div>"""
+        )
+    return f"""
     <header class="masthead mast-pubs">
       <div class="wrap">
         <p class="kicker">Publications</p>
-        <h1>Selected papers</h1>
-        <p class="lede">Recent work spanning iPSC cardiovascular models, CRISPR screens, and cardio-oncology. A complete list is on the WashU research profile.</p>
+        <h1>Publications</h1>
+        <p class="lede">{len(papers)} papers, grouped by year. Lab member <strong>Shen M</strong> is in bold. Altmetric and Dimensions badges load when those services have a record for the DOI.</p>
       </div>
     </header>
 
     <section>
       <div class="wrap">
-        <h2>Featured</h2>
-        <div class="pub-grid">
-          <article class="pub">
-            <p class="journal">Science · 2025</p>
-            <h3>Gastruloids enable modeling of the earliest stages of human cardiac and hepatic vascularization</h3>
-            <p>Abilez OJ, Yang H, Guan Y, Shen M, et al.</p>
-            <div class="chips">
-              <a class="chip" href="https://doi.org/10.1126/science.adu9375">DOI</a>
-              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/40472086/">PMID</a>
-            </div>
-          </article>
-          <article class="pub">
-            <p class="journal">Circulation · 2024</p>
-            <h3>Empowering Valvular Heart Disease Research With Stem Cell-Derived Valve Cells</h3>
-            <p>Shen M, et al.</p>
-            <div class="chips">
-              <a class="chip" href="https://doi.org/10.1161/CIRCULATIONAHA.124.068656">DOI</a>
-              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/38683900/">PMID</a>
-            </div>
-          </article>
-        </div>
-
-        <p class="year">2026</p>
-        <div class="pub-grid">
-          <article class="pub">
-            <p class="journal">Advanced Science · 2026</p>
-            <h3>A Systemic Selective Modified mRNA Delivery Platform for Preventing Chemotherapy-Induced Cardiotoxicity</h3>
-            <p>Yoo J, et al., including Shen M.</p>
-            <div class="chips">
-              <a class="chip" href="https://doi.org/10.1002/advs.202510543">DOI</a>
-              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/41545029/">PMID</a>
-            </div>
-          </article>
-          <article class="pub">
-            <p class="journal">Arterioscler Thromb Vasc Biol · 2026</p>
-            <h3>Generation of ciBMECs: Endothelial Cells Acquire Blood-Brain Barrier Identity and Function Through Wnt Activation</h3>
-            <p>Yang H, Zhang Y, Wang P, Wu AR, Shen M, Zhang JZ.</p>
-            <div class="chips">
-              <a class="chip" href="https://doi.org/10.1161/ATVBAHA.126.324711">DOI</a>
-              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/42237909/">PMID</a>
-            </div>
-          </article>
-        </div>
-
-        <p class="year">2025</p>
-        <div class="pub-grid">
-          <article class="pub">
-            <p class="journal">Circulation · 2025</p>
-            <h3>Human Single-Nucleus RNA Sequencing Identifies CD47 as a Therapeutic Target for Doxorubicin-Induced Cardiomyopathy</h3>
-            <p>Guo Z, et al., including Shen M.</p>
-            <div class="chips">
-              <a class="chip" href="https://doi.org/10.1161/CIRCULATIONAHA.124.071217">DOI</a>
-              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/40808662/">PMID</a>
-            </div>
-          </article>
-        </div>
-
-        <p class="year">2024</p>
-        <div class="pub-grid">
-          <article class="pub">
-            <p class="journal">Cell Stem Cell · 2024</p>
-            <h3>CRISPRi/a screens in human iPSC-cardiomyocytes identify glycolytic activation as a druggable pathway</h3>
-            <p>Liu C, et al., including Shen M.</p>
-            <div class="chips">
-              <a class="chip" href="https://doi.org/10.1016/j.stem.2024.10.007">DOI</a>
-              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/39515331/">PMID</a>
-            </div>
-          </article>
-          <article class="pub">
-            <p class="journal">Stem Cell Research &amp; Therapy · 2024</p>
-            <h3>BCL6B-dependent suppression of ETV2 hampers endothelial cell differentiation</h3>
-            <p>Li Z, et al., including Shen M.</p>
-            <div class="chips">
-              <a class="chip" href="https://doi.org/10.1186/s13287-024-03832-y">DOI</a>
-              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/39075623/">PMID</a>
-            </div>
-          </article>
-        </div>
-
-        <p class="year">2023</p>
-        <div class="pub-grid">
-          <article class="pub">
-            <p class="journal">Circulation · 2023</p>
-            <h3>Stepwise Generation of Human Induced Pluripotent Stem Cell-Derived Cardiac Pericytes to Model Coronary Microvascular Dysfunction</h3>
-            <p>Shen M, Liu C, Zhao SR, Manhas A, Sundaram L, Ameen M, Wu JC.</p>
-            <div class="chips">
-              <a class="chip" href="https://doi.org/10.1161/CIRCULATIONAHA.122.061770">DOI</a>
-              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/36745700/">PMID</a>
-            </div>
-          </article>
-          <article class="pub">
-            <p class="journal">STAR Protocols · 2023</p>
-            <h3>Protocol to generate cardiac pericytes from human induced pluripotent stem cells</h3>
-            <p>Shen M, Zhao SR, Khokhar Y, Li L, Zhou Y, Liu C, Wu JC.</p>
-            <div class="chips">
-              <a class="chip" href="https://doi.org/10.1016/j.xpro.2023.102256">DOI</a>
-              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/37119139/">PMID</a>
-            </div>
-          </article>
-        </div>
-
-        <p>For a complete list, see the <a href="https://profiles.wustl.edu/en/persons/mengcheng-shen/publications/">WashU research profile</a>.</p>
+        <nav class="year-nav" aria-label="Years">{jumps}</nav>
+        {"".join(blocks)}
+        <p>Also listed on the <a href="https://profiles.wustl.edu/en/persons/mengcheng-shen/publications/">WashU research profile</a>.</p>
       </div>
     </section>
 """
+
 
 
 def main() -> None:
@@ -698,12 +674,21 @@ def main() -> None:
         "publications.html": (
             "publications.html",
             "Publications · Shen Lab",
-            "Selected publications from the Shen Lab and collaborators.",
-            PUBLICATIONS,
+            "Publications from the Shen Lab and collaborators.",
+            build_publications(),
         ),
     }
+    extra = {
+        "publications.html": """
+  <script src="https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js"></script>
+  <script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>
+"""
+    }
     for name, (active, title, desc, body) in pages.items():
-        (ROOT / name).write_text(page(active, title, desc, body), encoding="utf-8")
+        (ROOT / name).write_text(
+            page(active, title, desc, body, extra.get(name, "")),
+            encoding="utf-8",
+        )
         print("wrote", name)
 
 

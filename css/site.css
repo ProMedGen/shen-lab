@@ -613,9 +613,70 @@ section {
   color: var(--blue);
 }
 
+.year-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.7rem;
+  margin: 0 0 1.6rem;
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.85rem;
+}
+
+.year-nav a {
+  text-decoration: none;
+}
+
+.pub-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--line);
+}
+
+.pub-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: start;
+  padding: 1.05rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.pub-row h3 {
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 650;
+  font-style: italic;
+  margin: 0 0 0.35rem;
+}
+
+.pub-row h3 a {
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.pub-row h3 a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+.pub-authors,
+.pub-venue {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+  color: #3a4354;
+}
+
+.pub-metrics {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 7rem;
+  justify-content: flex-end;
+}
+
 .pub-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
@@ -822,8 +883,13 @@ section {
   .footer-inner,
   .gallery,
   .pub-grid,
+  .pub-row,
   .two-col {
     grid-template-columns: 1fr;
+  }
+
+  .pub-metrics {
+    justify-content: flex-start;
   }
 
   .mosaic {
