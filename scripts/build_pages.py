@@ -69,7 +69,6 @@ def page(active: str, title: str, description: str, body: str) -> str:
       <div>
         <strong>Cardiovascular Precision Medicine Lab</strong>
         <p>Division of Cardiology · Center for Cardiovascular Research · Washington University School of Medicine in St. Louis</p>
-        <small>Internal GitHub Pages site. Visible to people with read access to this repository. Not for public indexing.</small>
       </div>
       <div>
         <div class="affiliations">
