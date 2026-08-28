@@ -2,6 +2,10 @@
 
 Private, members-only website for the Cardiovascular Precision Medicine Lab (Shen Lab) at Washington University School of Medicine.
 
+- Repository: https://github.com/ProMedGen/shen-lab
+- Site (org members, after GitHub login): https://super-adventure-gwynznl.pages.github.io/
+- Pages settings: https://github.com/ProMedGen/shen-lab/settings/pages
+
 Led by **Mengcheng Shen, PhD**, Assistant Professor of Medicine and of Developmental Biology.
 
 ## Publish
