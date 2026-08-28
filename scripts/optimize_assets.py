@@ -6,6 +6,7 @@ from __future__ import annotations
 import subprocess
 from pathlib import Path
 
+import numpy as np
 from PIL import Image, ImageOps
 
 SRC = Path("/Volumes/CrucialX10A/Apps/Website/Shen_Lab/Shen Lab WashU_lab_website_materials")
@@ -13,6 +14,19 @@ IMG = Path("/Volumes/CrucialX10A/Apps/Website/Shen_Lab/assets/img")
 VID = Path("/Volumes/CrucialX10A/Apps/Website/Shen_Lab/assets/video")
 IMG.mkdir(parents=True, exist_ok=True)
 VID.mkdir(parents=True, exist_ok=True)
+
+
+def white_to_alpha(im: Image.Image, floor: float = 0.035) -> Image.Image:
+    """Treat white paper as transparent and recover anti-aliased ink color."""
+    arr = np.asarray(im.convert("RGBA"), dtype=np.float32)
+    rgb = arr[..., :3]
+    alpha = ((255.0 - rgb) / 255.0).max(axis=2)
+    alpha = np.where(alpha < floor, 0.0, np.clip(alpha, 0.0, 1.0))
+    fg = (rgb - 255.0) / np.maximum(alpha[..., None], 1e-6) + 255.0
+    out = np.empty_like(arr)
+    out[..., :3] = np.clip(fg, 0, 255)
+    out[..., 3] = alpha * 255.0
+    return Image.fromarray(out.astype(np.uint8), "RGBA")
 
 
 def trim_whitespace(im: Image.Image, threshold: int = 245) -> Image.Image:
@@ -51,7 +65,17 @@ def convert_image(name: str, dest_name: str, kind: str = "photo", max_w: int = 1
     dest = IMG / dest_name
     im = Image.open(src)
     if kind == "logo":
-        im = trim_whitespace(im, threshold=248)
+        im = white_to_alpha(im)
+        alpha = im.getchannel("A")
+        bbox = alpha.point(lambda p: 255 if p > 10 else 0).getbbox()
+        if bbox:
+            pad = 16
+            im = im.crop((
+                max(0, bbox[0] - pad),
+                max(0, bbox[1] - pad),
+                min(im.width, bbox[2] + pad),
+                min(im.height, bbox[3] + pad),
+            ))
         save_png(im, dest, max_w=max_w)
     elif kind == "logo-banner":
         im = trim_whitespace(im, threshold=8)
