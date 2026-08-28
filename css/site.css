@@ -584,16 +584,12 @@ section {
   font-size: 0.95rem;
 }
 
-.cv-stanford {
+.cv-current {
   background: linear-gradient(90deg, rgba(200, 16, 46, 0.06), transparent 55%);
   margin: 0 -0.7rem;
   padding-left: 0.7rem;
   padding-right: 0.7rem;
   border-left: 3px solid var(--red);
-}
-
-.cv-stanford + .cv-stanford {
-  border-top: 0;
 }
 
 .honor-feature {
@@ -1373,7 +1369,7 @@ h2.year {
     padding-top: 0;
   }
 
-  .cv-stanford {
+  .cv-current {
     margin-left: 0;
     margin-right: 0;
   }

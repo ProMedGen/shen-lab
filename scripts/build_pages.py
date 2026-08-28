@@ -519,16 +519,23 @@ PEOPLE = r"""
       <div class="wrap cv-honors-grid">
         <div>
           <p class="kicker">Curriculum</p>
-          <h2>Education and training</h2>
+          <h2>Appointments, education, and training</h2>
           <ol class="cv-list">
-            <li class="cv-stanford">
+            <li class="cv-current">
+              <span class="cv-years">2025–present</span>
+              <div>
+                <strong>Assistant Professor of Medicine</strong>
+                <p>Washington University School of Medicine, since May 2025. Division of Cardiology; also Assistant Professor of Developmental Biology.</p>
+              </div>
+            </li>
+            <li>
               <span class="cv-years">2023–2025</span>
               <div>
                 <strong>Instructor</strong>
                 <p>Stanford Cardiovascular Institute. Joseph C. Wu laboratory.</p>
               </div>
             </li>
-            <li class="cv-stanford">
+            <li>
               <span class="cv-years">2018–2023</span>
               <div>
                 <strong>Postdoctoral fellow</strong>
