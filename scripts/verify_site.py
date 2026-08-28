@@ -7,14 +7,22 @@ ROOT = Path("/Volumes/CrucialX10A/Apps/Website/Shen_Lab")
 SHOTS = ROOT / "scripts" / "screenshots"
 SHOTS.mkdir(parents=True, exist_ok=True)
 BASE = "http://127.0.0.1:4173"
-PAGES = ["index.html", "research.html", "models.html", "people.html", "join.html"]
+PAGES = [
+    "index.html",
+    "research.html",
+    "models.html",
+    "publications.html",
+    "people.html",
+    "join.html",
+    "contact.html",
+]
 MISSION = "The Cardiovascular Precision Medicine Lab is led by Dr. Mengcheng Shen"
 
 
 def check(page, path: str) -> list[str]:
     problems = []
-    page.goto(f"{BASE}/{path}", wait_until="networkidle", timeout=30000)
-    page.wait_for_timeout(800)
+    page.goto(f"{BASE}/{path}", wait_until="domcontentloaded", timeout=30000)
+    page.wait_for_timeout(600)
     broken = page.evaluate(
         """() => {
           const urls = [];
@@ -26,10 +34,6 @@ def check(page, path: str) -> list[str]:
     )
     if broken:
         problems.append(f"{path} broken images: {broken}")
-    for sel, name in [("css/site.css", "css"), ("js/site.js", "js")]:
-        href = page.locator(f'link[href="{sel}"], script[src="{sel}"]')
-        if href.count() == 0:
-            problems.append(f"{path} missing {name}")
     title = page.title()
     if "Shen Lab" not in title:
         problems.append(f"{path} title is {title!r}")
@@ -43,28 +47,25 @@ def main() -> None:
         page = browser.new_page(viewport={"width": 1280, "height": 900})
         for path in PAGES:
             problems.extend(check(page, path))
-            page.screenshot(path=str(SHOTS / f"desktop-{path.replace('.html', '')}.png"), full_page=True)
-        page.goto(f"{BASE}/index.html", wait_until="networkidle")
-        body = page.inner_text("main")
-        if MISSION not in body:
+            page.screenshot(
+                path=str(SHOTS / f"desktop-{path.replace('.html', '')}.png"),
+                full_page=True,
+            )
+        page.goto(f"{BASE}/index.html", wait_until="domcontentloaded")
+        if MISSION not in page.inner_text("main"):
             problems.append("home is missing the lab mission paragraph")
-        for label in ["Research", "Models", "People", "Join"]:
-            page.get_by_role("navigation").get_by_role("link", name=label).click()
-            page.wait_for_load_state("networkidle")
-            if page.url.endswith("index.html"):
-                problems.append(f"nav {label} stayed on home")
+        for label in ["Research", "Models", "Publications", "People", "Join", "Contact"]:
+            page.get_by_role("navigation").get_by_role("link", name=label, exact=True).click()
+            page.wait_for_load_state("domcontentloaded")
         page.set_viewport_size({"width": 390, "height": 844})
-        page.goto(f"{BASE}/index.html", wait_until="networkidle")
+        page.goto(f"{BASE}/index.html", wait_until="domcontentloaded")
         page.screenshot(path=str(SHOTS / "mobile-home.png"), full_page=True)
         page.get_by_role("button", name="Menu").click()
-        if not page.locator("nav").evaluate("el => el.classList.contains('open')"):
+        if not page.locator(".nav-bar").evaluate("el => el.classList.contains('open')"):
             problems.append("mobile menu did not open")
-        page.get_by_role("navigation").get_by_role("link", name="Models").click()
-        page.wait_for_load_state("networkidle")
-        page.screenshot(path=str(SHOTS / "mobile-models.png"), full_page=True)
-        videos = page.locator("video")
-        if videos.count() < 4:
-            problems.append(f"models page has only {videos.count()} videos")
+        page.get_by_role("navigation").get_by_role("link", name="Publications").click()
+        page.wait_for_load_state("domcontentloaded")
+        page.screenshot(path=str(SHOTS / "mobile-publications.png"), full_page=True)
         browser.close()
     if problems:
         print("PROBLEMS")

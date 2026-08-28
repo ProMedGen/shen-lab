@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Research · Shen Lab</title>
-  <meta name="description" content="Five research areas of the Shen Lab: differentiation, CRISPR screens, disease modeling, cardio-oncology, and Perturb-seq.">
+  <meta name="description" content="Research programs of the Shen Lab: differentiation, CRISPR screens, disease modeling, cardio-oncology, and Perturb-seq.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="assets/img/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,76 +16,111 @@
   <a class="skip" href="#content">Skip to content</a>
   <div class="banner">Members-only preview for <strong>ProMedGen</strong> · Cardiovascular Precision Medicine Lab</div>
   <header class="site-header">
-    <div class="header-inner">
+    <div class="header-top">
       <a class="brand" href="index.html">
         <img src="assets/img/logo.png" alt="Shen Lab logo">
         <span class="brand-text">
           <strong>Shen Lab</strong>
-          <span>Cardiovascular Precision Medicine</span>
+          <span>WashU Medicine</span>
         </span>
       </a>
+      <p class="tagline">Human cells, CRISPR screens, new heart medicines</p>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav" aria-label="Primary">
+    </div>
+    <div class="nav-bar" id="site-nav">
+      <nav aria-label="Primary">
         <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="research.html" aria-current="page">Research</a></li>
-          <li><a href="models.html">Models</a></li>
-          <li><a href="people.html">People</a></li>
-          <li><a href="join.html">Join</a></li>
+            <li><a href="research.html" aria-current="page">Research</a></li>
+            <li><a href="models.html">Models</a></li>
+            <li><a href="publications.html">Publications</a></li>
+            <li><a href="people.html">People</a></li>
+            <li><a href="join.html">Join</a></li>
+            <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
   <main id="content">
 
-    <div class="wrap page-hero">
-      <p class="kicker">Research</p>
-      <h1>A human-cell pipeline from fate maps to therapeutics.</h1>
-      <p class="lede">We integrate hiPSCs with CRISPR knockout, CRISPRi, and CRISPRa screens to define pathogenic drivers of congenital and acquired cardiovascular disease.</p>
-    </div>
+    <header class="masthead mast-research">
+      <div class="wrap">
+        <p class="kicker">Research</p>
+        <h1>Our research</h1>
+        <p class="lede">We combine unique access to human iPSC cardiovascular models with CRISPR screens, organoids, and computational perturbation maps.</p>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap two-col">
+        <p>The Shen Lab integrates human induced pluripotent stem cells with high-throughput CRISPR knockout, CRISPRi, and CRISPRa screens to define the pathogenic drivers of congenital and acquired cardiovascular disease.</p>
+        <p>Because the disease models are built directly from human cells, they are human-relevant and predictive, and sit inside the NIH and FDA New Approach Methodologies (NAMs) push toward the next generation of biomedical research.</p>
+      </div>
+    </section>
 
     <section>
       <div class="wrap stack">
-        <article class="area">
-          <p class="mark">01</p>
-          <h2>Robust cardiovascular differentiation in 2D and 3D</h2>
-          <p>We develop protocols to generate diverse cardiovascular cell types from hiPSCs — cardiomyocytes, endothelial cells, epicardial cells, cardiac neural crest cells, cardiac smooth muscle cells, cardiac fibroblasts, and cardiac pericytes — as well as vessel organoids and vascularized cardiac organoids. A current priority is engineering cardiac organoids that incorporate cardiomyocytes, vascular cells, and immune cells. To support regenerative medicine, we are establishing xeno-free, chemically defined protocols that perform reproducibly across diverse iPSC lines.</p>
-        </article>
-        <figure class="figure-card">
-          <img src="assets/img/endothelial-protocol.jpg" alt="Xeno-free iPSC-endothelial cell differentiation protocol">
-          <figcaption>High-efficiency iPSC-endothelial differentiation in a xeno-free system (CD144, CD31, eNOS, vWF).</figcaption>
-        </figure>
-
-        <article class="area">
-          <p class="mark">02</p>
-          <h2>Functional genomics for cell-fate decisions and variant function</h2>
-          <p>We deploy genome-scale CRISPR screens to uncover master regulators of cell type–specific fate decisions. Using CRISPR genome editing, we install variants of uncertain significance into hiPSCs to resolve their pathophysiological consequences. We further apply deep-learning models to prioritize de novo non-coding variants predicted to drive congenital heart disease in a cell type–specific manner, then use CRISPR-edited iPSCs to establish genotype–phenotype causality.</p>
+        <article class="topic" id="differentiation">
+          <img src="assets/img/endothelial-protocol.jpg" alt="Xeno-free iPSC-endothelial differentiation">
+          <div class="topic-copy">
+            <p class="kicker">Differentiation</p>
+            <h2>Robust cardiovascular cells in 2D and 3D</h2>
+            <p>We develop protocols to generate cardiomyocytes, endothelial cells, epicardial cells, cardiac neural crest cells, cardiac smooth muscle cells, cardiac fibroblasts, and cardiac pericytes, as well as vessel organoids and vascularized cardiac organoids. A current priority is organoids that incorporate cardiomyocytes, vascular cells, and immune cells. For regenerative medicine, we are establishing xeno-free, chemically defined protocols that perform across diverse iPSC lines.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1161/CIRCULATIONAHA.122.061770">Circulation 2023 · pericytes</a>
+              <a class="chip" href="https://doi.org/10.1016/j.xpro.2023.102256">STAR Protocols 2023</a>
+            </div>
+          </div>
         </article>
 
-        <article class="area">
-          <p class="mark">03</p>
-          <h2>Patient-specific disease modeling with isogenic controls</h2>
-          <p>Using patient-derived hiPSCs paired with CRISPR/Cas9-corrected isogenic controls, we dissect cardiomyopathy, pulmonary hypertension, and vascular disease. Druggable-genome CRISPR screens nominate disease drivers without bias and identify small molecules that mitigate or rescue diseased phenotypes.</p>
+        <article class="topic" id="genomics">
+          <img src="assets/img/research-overview.jpg" alt="Lab research overview">
+          <div class="topic-copy">
+            <p class="kicker">Functional genomics</p>
+            <h2>Fate decisions and variant function</h2>
+            <p>We deploy genome-scale CRISPR screens to uncover master regulators of cell type–specific fate decisions. Using CRISPR genome editing, we install variants of uncertain significance into hiPSCs. We also apply deep-learning models to prioritize de novo non-coding variants predicted to drive congenital heart disease, then use CRISPR-edited iPSCs to test genotype–phenotype causality.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1016/j.stem.2024.10.007">Cell Stem Cell 2024 · CRISPRi/a</a>
+              <a class="chip" href="https://doi.org/10.1016/j.cell.2022.11.028">Cell 2022 · CHD variants</a>
+            </div>
+          </div>
         </article>
 
-        <article class="area">
-          <p class="mark">04</p>
-          <h2>Precision cardio-oncology</h2>
-          <p>We combine druggable-genome CRISPR screens with cancer survivors’ iPSC-derived cardiovascular cells to identify therapeutic targets that reduce anti-cancer drug-induced cardiovascular toxicity without compromising oncologic efficacy, a human-cell strategy aligned with the drug-safety goals of NAMs.</p>
+        <article class="topic" id="modeling">
+          <img src="assets/img/pericytes.jpg" alt="iPSC-cardiac pericytes">
+          <div class="topic-copy">
+            <p class="kicker">Disease modeling</p>
+            <h2>Patient iPSCs with isogenic controls</h2>
+            <p>Using patient-derived hiPSCs paired with CRISPR/Cas9-corrected isogenic controls, we dissect cardiomyopathy, pulmonary hypertension, and vascular disease. Druggable-genome CRISPR screens nominate disease drivers without bias and identify small molecules that mitigate or rescue diseased phenotypes.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1161/CIRCULATIONAHA.124.068656">Circulation 2024 · valve cells</a>
+              <a class="chip" href="https://doi.org/10.1016/j.scr.2022.102941">Stem Cell Res 2022 · TTN DCM</a>
+            </div>
+          </div>
         </article>
-        <figure class="figure-card">
-          <img src="assets/img/crispr-pipeline.jpg" alt="CRISPR screen pipeline for precision cardio-oncology">
-          <figcaption>CRISPR screen pipeline in precision cardio-oncology: iPSC cardiovascular cells, anti-cancer drugs, deep sequencing, and compound rescue.</figcaption>
-        </figure>
-        <figure class="figure-card">
-          <img src="assets/img/cardio-oncology.jpg" alt="Illustration of the heart and tumor cells for cardio-oncology">
-          <figcaption>Cardio-oncology: protect cardiovascular tissue during anti-cancer therapy.</figcaption>
-        </figure>
 
-        <article class="area">
-          <p class="mark">05</p>
-          <h2>Single-cell Perturb-seq for virtual-cell foundation models</h2>
-          <p>We are generating physiologically relevant single-cell Perturb-seq datasets in iPSC-derived cardiovascular cells to train virtual-cell foundation models, advancing scalable in silico approaches to cardiovascular research.</p>
+        <article class="topic" id="cardio-oncology">
+          <img src="assets/img/crispr-pipeline.jpg" alt="CRISPR screen pipeline for cardio-oncology">
+          <div class="topic-copy">
+            <p class="kicker">Precision cardio-oncology</p>
+            <h2>Protect the heart without losing anti-cancer efficacy</h2>
+            <p>We combine druggable-genome CRISPR screens with cancer survivors’ iPSC-derived cardiovascular cells to identify therapeutic targets that reduce anti-cancer drug-induced cardiovascular toxicity without compromising oncologic efficacy.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1002/advs.202510543">Adv Sci 2026 · cardiotoxicity</a>
+              <a class="chip" href="https://doi.org/10.1161/CIRCULATIONAHA.124.071217">Circulation 2025 · CD47</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="topic" id="perturb-seq">
+          <img src="assets/img/vessel-organoid.jpg" alt="iPSC vessel organoid">
+          <div class="topic-copy">
+            <p class="kicker">Perturb-seq</p>
+            <h2>Training data for virtual-cell models</h2>
+            <p>We are generating physiologically relevant single-cell Perturb-seq datasets in iPSC-derived cardiovascular cells to train virtual-cell foundation models, advancing scalable in silico approaches to cardiovascular research.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1126/science.adu9375">Science 2025 · gastruloids</a>
+            </div>
+          </div>
         </article>
       </div>
     </section>
@@ -102,24 +137,6 @@
           <li><strong>Mechanism and safety.</strong> Patient/isogenic models, VUS knock-ins, and cardio-oncology screens.</li>
           <li><strong>In silico modeling.</strong> Perturb-seq datasets and virtual-cell foundation models.</li>
         </ul>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <h2>Selected references</h2>
-        <ol class="refs">
-          <li>Takahashi K, et al. Induction of pluripotent stem cells from adult human fibroblasts by defined factors. <em>Cell</em>. 2007.</li>
-          <li>Lian X, et al. Robust cardiomyocyte differentiation from human pluripotent stem cells via temporal modulation of canonical Wnt signaling. <em>PNAS</em>. 2012.</li>
-          <li>Burridge PW, et al. Chemically defined generation of human cardiomyocytes. <em>Nat Methods</em>. 2014.</li>
-          <li>Wimmer RA, et al. Human blood vessel organoids as a model of diabetic vasculopathy. <em>Nature</em>. 2019.</li>
-          <li>Hofbauer P, et al. Cardioids reveal self-organizing principles of human cardiogenesis. <em>Cell</em>. 2021.</li>
-          <li>Dixit A, et al. Perturb-Seq: dissecting molecular circuits with scalable single-cell RNA profiling of pooled genetic screens. <em>Cell</em>. 2016.</li>
-          <li>Replogle JM, et al. Mapping information-rich genotype-phenotype landscapes with genome-scale Perturb-seq. <em>Cell</em>. 2022.</li>
-          <li>National Institutes of Health. NIH to Prioritize Human-Based Research Technologies. April 29, 2025.</li>
-          <li>NIH Common Fund. <a href="https://commonfund.nih.gov/complementarie">Complement-ARIE</a>.</li>
-          <li>U.S. Food and Drug Administration. Roadmap to Reducing Animal Testing in Preclinical Safety Studies. April 2025.</li>
-        </ol>
       </div>
     </section>
 

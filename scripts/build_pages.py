@@ -6,11 +6,12 @@ from pathlib import Path
 ROOT = Path("/Volumes/CrucialX10A/Apps/Website/Shen_Lab")
 
 NAV = [
-    ("index.html", "Home"),
     ("research.html", "Research"),
     ("models.html", "Models"),
+    ("publications.html", "Publications"),
     ("people.html", "People"),
     ("join.html", "Join"),
+    ("contact.html", "Contact"),
 ]
 
 
@@ -18,7 +19,7 @@ def nav_html(active: str) -> str:
     items = []
     for href, label in NAV:
         current = ' aria-current="page"' if href == active else ""
-        items.append(f'          <li><a href="{href}"{current}>{label}</a></li>')
+        items.append(f'            <li><a href="{href}"{current}>{label}</a></li>')
     return "\n".join(items)
 
 
@@ -41,16 +42,19 @@ def page(active: str, title: str, description: str, body: str) -> str:
   <a class="skip" href="#content">Skip to content</a>
   <div class="banner">Members-only preview for <strong>ProMedGen</strong> · Cardiovascular Precision Medicine Lab</div>
   <header class="site-header">
-    <div class="header-inner">
+    <div class="header-top">
       <a class="brand" href="index.html">
         <img src="assets/img/logo.png" alt="Shen Lab logo">
         <span class="brand-text">
           <strong>Shen Lab</strong>
-          <span>Cardiovascular Precision Medicine</span>
+          <span>WashU Medicine</span>
         </span>
       </a>
+      <p class="tagline">Human cells, CRISPR screens, new heart medicines</p>
       <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
-      <nav id="site-nav" aria-label="Primary">
+    </div>
+    <div class="nav-bar" id="site-nav">
+      <nav aria-label="Primary">
         <ul>
 {nav_html(active)}
         </ul>
@@ -82,32 +86,23 @@ def page(active: str, title: str, description: str, body: str) -> str:
 
 
 HOME = r"""
-    <div class="wrap hero">
-      <div>
+    <section class="hero-bleed">
+      <img src="assets/img/cm-ctnt.jpg" alt="iPSC-cardiomyocytes stained for cardiac troponin T">
+      <div class="hero-copy">
         <p class="kicker">WashU Medicine · Cardiology</p>
-        <h1>Human cells, CRISPR screens, and organoids for precision cardiovascular medicine.</h1>
-        <p class="lede">The Cardiovascular Precision Medicine Lab is led by Dr. Mengcheng Shen, PhD. We decode the gene programs that drive congenital and acquired cardiovascular disease, then turn those maps into next-generation therapeutics.</p>
+        <h1>Decoding and treating human cardiovascular disease.</h1>
+        <p class="lede">The Cardiovascular Precision Medicine Lab uses human iPSCs, CRISPR screens, and organoids to find disease drivers and next-generation therapeutics.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="research.html">Research program</a>
-          <a class="btn btn-ghost" href="models.html">Cell and organoid models</a>
+          <a class="btn btn-light" href="research.html">Learn more</a>
+          <a class="btn btn-ghost" href="models.html">Watch beating cells</a>
         </div>
       </div>
-      <div class="hero-media">
-        <video autoplay muted loop playsinline poster="assets/img/cm-beating-poster.jpg">
-          <source src="assets/video/cm-beating.mp4" type="video/mp4">
-        </video>
-        <img src="assets/img/cm-ctnt.jpg" alt="iPSC-cardiomyocytes stained for cardiac troponin T">
-        <p class="caption">iPSC-cardiomyocytes · beating culture and cTnT (red), nuclei (blue)</p>
-      </div>
-    </div>
+    </section>
 
     <section>
       <div class="wrap">
-        <div class="section-head">
-          <p class="kicker">Lab</p>
-          <h2>What we do</h2>
-        </div>
-        <div class="prose">
+        <div class="mission">
+          <h2>Research</h2>
           <p>The Cardiovascular Precision Medicine Lab is led by Dr. Mengcheng Shen, PhD, with a goal to understand the genetic and cellular mechanisms that regulate the development and function of the human cardiovascular system in health and disease. Using human induced pluripotent stem cells and emerging functional-genomic, genome-editing, and organoid technologies, we are focused on decoding the gene programs that drive congenital and acquired cardiovascular disease, the leading cause of death worldwide.</p>
           <p>To translate these findings back to the clinic, the lab also develops new approaches, including novel iPSC-cardiovascular models, high-throughput CRISPR screens, and single-cell Perturb-seq coupled with virtual-cell computational models, to nominate disease drivers and deliver next-generation, precision-based therapeutics, from small molecules that prevent anti-cancer drug–induced cardiotoxicity to chemically defined cells for regenerative medicine. By building these human-relevant models entirely from human cells, in step with the NIH New Approach Methodologies (NAMs) initiative, we ultimately seek to advance the diagnosis and treatment of cardiomyopathy, congenital heart disease, and related cardiovascular disorders.</p>
         </div>
@@ -117,61 +112,62 @@ HOME = r"""
     <section>
       <div class="wrap">
         <div class="section-head">
-          <p class="kicker">Program</p>
-          <h2>Five interconnected areas</h2>
-          <p>The work spans differentiation, functional genomics, patient-specific disease models, precision cardio-oncology, and Perturb-seq for virtual-cell models.</p>
+          <p class="kicker">Science</p>
+          <h2>Five interconnected programs</h2>
         </div>
-        <div class="areas">
-          <article class="area">
-            <p class="mark">01 · Differentiation</p>
-            <h3>Robust cardiovascular cells in 2D and 3D</h3>
-            <p>Cardiomyocytes, endothelial cells, epicardial cells, smooth muscle cells, fibroblasts, pericytes, vessel organoids, and vascularized cardiac organoids — with xeno-free, chemically defined protocols.</p>
-          </article>
-          <article class="area">
-            <p class="mark">02 · Functional genomics</p>
-            <h3>Fate decisions and variant function</h3>
-            <p>Genome-scale CRISPR screens, VUS knock-ins, and cell-type-specific tests of non-coding variants predicted to drive congenital heart disease.</p>
-          </article>
-          <article class="area">
-            <p class="mark">03 · Disease modeling</p>
-            <h3>Patient iPSCs with isogenic controls</h3>
-            <p>Cardiomyopathy, pulmonary hypertension, and vascular disease, with druggable-genome screens that nominate drivers and rescue compounds.</p>
-          </article>
-          <article class="area">
-            <p class="mark">04 · Cardio-oncology</p>
-            <h3>Protect the heart without losing anti-cancer efficacy</h3>
-            <p>Cancer-survivor iPSC cardiovascular cells plus CRISPR screens to reduce drug-induced cardiotoxicity.</p>
-          </article>
-          <article class="area">
-            <p class="mark">05 · Perturb-seq</p>
-            <h3>Training data for virtual cells</h3>
-            <p>Physiologically relevant single-cell Perturb-seq in iPSC-derived cardiovascular cells for in silico foundation models.</p>
-          </article>
+        <div class="programs">
+          <a class="program" href="research.html#differentiation">
+            <img src="assets/img/cm-ctnt.jpg" alt="iPSC-cardiomyocytes">
+            <div>
+              <h3>Differentiation</h3>
+              <p>2D and 3D cardiovascular cells, vessel organoids, and vascularized cardiac organoids from hiPSCs.</p>
+            </div>
+          </a>
+          <a class="program" href="research.html#genomics">
+            <img src="assets/img/endothelial-protocol.jpg" alt="Endothelial differentiation protocol">
+            <div>
+              <h3>Functional genomics</h3>
+              <p>CRISPR screens, VUS knock-ins, and cell-type-specific tests of non-coding variants.</p>
+            </div>
+          </a>
+          <a class="program" href="research.html#modeling">
+            <img src="assets/img/pericytes.jpg" alt="iPSC-cardiac pericytes">
+            <div>
+              <h3>Disease modeling</h3>
+              <p>Patient iPSCs with isogenic controls for cardiomyopathy, pulmonary hypertension, and vascular disease.</p>
+            </div>
+          </a>
+          <a class="program" href="research.html#cardio-oncology">
+            <img src="assets/img/cardio-oncology.jpg" alt="Cardio-oncology illustration">
+            <div>
+              <h3>Precision cardio-oncology</h3>
+              <p>Protect the heart during anti-cancer therapy without losing oncologic efficacy.</p>
+            </div>
+          </a>
+          <a class="program" href="research.html#perturb-seq">
+            <img src="assets/img/vessel-organoid.jpg" alt="iPSC vessel organoid">
+            <div>
+              <h3>Perturb-seq</h3>
+              <p>Single-cell perturbation maps as training data for virtual-cell models of the heart.</p>
+            </div>
+          </a>
         </div>
       </div>
     </section>
 
     <section>
       <div class="wrap">
-        <figure class="wide-figure">
-          <img src="assets/img/research-overview.jpg" alt="Overview of Shen Lab research: iPSC differentiation, CRISPR screens, disease modeling, and cardio-oncology">
-          <figcaption class="caption">Lab research overview · patient iPSCs, CRISPR editing, 2D/3D cardiovascular cell types, disease modeling, and cardio-oncology screens</figcaption>
-        </figure>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap nams">
-        <div>
-          <p class="kicker">NAMs</p>
-          <h2>Built on human-relevant methods</h2>
-          <p>The program sits on the three pillars of the NIH New Approach Methodologies initiative: human in vitro models, human-relevant mechanism and safety, and in silico modeling.</p>
-        </div>
-        <ul>
-          <li>hiPSC cardiovascular cells, vessel organoids, and multi-lineage cardiac organoids</li>
-          <li>Patient-specific and isogenic models, VUS knock-ins, cardio-oncology safety screens</li>
-          <li>Single-cell Perturb-seq and virtual-cell models</li>
-        </ul>
+        <p class="kicker">Featured publication</p>
+        <article class="pub">
+          <p class="journal">Science · 2025</p>
+          <h3>Gastruloids enable modeling of the earliest stages of human cardiac and hepatic vascularization</h3>
+          <p>Abilez OJ, Yang H, Guan Y, Shen M, et al. Human pluripotent stem cell gastruloids used to study how the heart and liver first become vascularized.</p>
+          <div class="chips">
+            <a class="chip" href="https://doi.org/10.1126/science.adu9375">DOI</a>
+            <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/40472086/">PMID</a>
+            <a class="chip" href="publications.html">All publications</a>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -210,77 +206,88 @@ HOME = r"""
         </div>
       </div>
     </section>
-
-    <section>
-      <div class="wrap">
-        <article class="pi">
-          <img src="assets/img/headshot.jpg" alt="Portrait of Mengcheng Shen, PhD">
-          <div>
-            <p class="kicker">Principal investigator</p>
-            <h2>Mengcheng Shen, PhD</h2>
-            <p>Assistant Professor of Medicine and of Developmental Biology, Washington University School of Medicine. The lab uses high-throughput stem-cell and CRISPR-screen platforms to study genetic-variant and drug-induced cardiovascular pathologies.</p>
-            <ul class="meta">
-              <li>Cardiology</li>
-              <li>Center for Cardiovascular Research</li>
-              <li>Center of Regenerative Medicine</li>
-              <li>Siteman Cancer Center</li>
-            </ul>
-            <a class="btn btn-ghost" href="people.html">Biography and links</a>
-          </div>
-        </article>
-      </div>
-    </section>
 """
 
 RESEARCH = r"""
-    <div class="wrap page-hero">
-      <p class="kicker">Research</p>
-      <h1>A human-cell pipeline from fate maps to therapeutics.</h1>
-      <p class="lede">We integrate hiPSCs with CRISPR knockout, CRISPRi, and CRISPRa screens to define pathogenic drivers of congenital and acquired cardiovascular disease.</p>
-    </div>
+    <header class="masthead mast-research">
+      <div class="wrap">
+        <p class="kicker">Research</p>
+        <h1>Our research</h1>
+        <p class="lede">We combine unique access to human iPSC cardiovascular models with CRISPR screens, organoids, and computational perturbation maps.</p>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap two-col">
+        <p>The Shen Lab integrates human induced pluripotent stem cells with high-throughput CRISPR knockout, CRISPRi, and CRISPRa screens to define the pathogenic drivers of congenital and acquired cardiovascular disease.</p>
+        <p>Because the disease models are built directly from human cells, they are human-relevant and predictive, and sit inside the NIH and FDA New Approach Methodologies (NAMs) push toward the next generation of biomedical research.</p>
+      </div>
+    </section>
 
     <section>
       <div class="wrap stack">
-        <article class="area">
-          <p class="mark">01</p>
-          <h2>Robust cardiovascular differentiation in 2D and 3D</h2>
-          <p>We develop protocols to generate diverse cardiovascular cell types from hiPSCs — cardiomyocytes, endothelial cells, epicardial cells, cardiac neural crest cells, cardiac smooth muscle cells, cardiac fibroblasts, and cardiac pericytes — as well as vessel organoids and vascularized cardiac organoids. A current priority is engineering cardiac organoids that incorporate cardiomyocytes, vascular cells, and immune cells. To support regenerative medicine, we are establishing xeno-free, chemically defined protocols that perform reproducibly across diverse iPSC lines.</p>
-        </article>
-        <figure class="figure-card">
-          <img src="assets/img/endothelial-protocol.jpg" alt="Xeno-free iPSC-endothelial cell differentiation protocol">
-          <figcaption>High-efficiency iPSC-endothelial differentiation in a xeno-free system (CD144, CD31, eNOS, vWF).</figcaption>
-        </figure>
-
-        <article class="area">
-          <p class="mark">02</p>
-          <h2>Functional genomics for cell-fate decisions and variant function</h2>
-          <p>We deploy genome-scale CRISPR screens to uncover master regulators of cell type–specific fate decisions. Using CRISPR genome editing, we install variants of uncertain significance into hiPSCs to resolve their pathophysiological consequences. We further apply deep-learning models to prioritize de novo non-coding variants predicted to drive congenital heart disease in a cell type–specific manner, then use CRISPR-edited iPSCs to establish genotype–phenotype causality.</p>
+        <article class="topic" id="differentiation">
+          <img src="assets/img/endothelial-protocol.jpg" alt="Xeno-free iPSC-endothelial differentiation">
+          <div class="topic-copy">
+            <p class="kicker">Differentiation</p>
+            <h2>Robust cardiovascular cells in 2D and 3D</h2>
+            <p>We develop protocols to generate cardiomyocytes, endothelial cells, epicardial cells, cardiac neural crest cells, cardiac smooth muscle cells, cardiac fibroblasts, and cardiac pericytes, as well as vessel organoids and vascularized cardiac organoids. A current priority is organoids that incorporate cardiomyocytes, vascular cells, and immune cells. For regenerative medicine, we are establishing xeno-free, chemically defined protocols that perform across diverse iPSC lines.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1161/CIRCULATIONAHA.122.061770">Circulation 2023 · pericytes</a>
+              <a class="chip" href="https://doi.org/10.1016/j.xpro.2023.102256">STAR Protocols 2023</a>
+            </div>
+          </div>
         </article>
 
-        <article class="area">
-          <p class="mark">03</p>
-          <h2>Patient-specific disease modeling with isogenic controls</h2>
-          <p>Using patient-derived hiPSCs paired with CRISPR/Cas9-corrected isogenic controls, we dissect cardiomyopathy, pulmonary hypertension, and vascular disease. Druggable-genome CRISPR screens nominate disease drivers without bias and identify small molecules that mitigate or rescue diseased phenotypes.</p>
+        <article class="topic" id="genomics">
+          <img src="assets/img/research-overview.jpg" alt="Lab research overview">
+          <div class="topic-copy">
+            <p class="kicker">Functional genomics</p>
+            <h2>Fate decisions and variant function</h2>
+            <p>We deploy genome-scale CRISPR screens to uncover master regulators of cell type–specific fate decisions. Using CRISPR genome editing, we install variants of uncertain significance into hiPSCs. We also apply deep-learning models to prioritize de novo non-coding variants predicted to drive congenital heart disease, then use CRISPR-edited iPSCs to test genotype–phenotype causality.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1016/j.stem.2024.10.007">Cell Stem Cell 2024 · CRISPRi/a</a>
+              <a class="chip" href="https://doi.org/10.1016/j.cell.2022.11.028">Cell 2022 · CHD variants</a>
+            </div>
+          </div>
         </article>
 
-        <article class="area">
-          <p class="mark">04</p>
-          <h2>Precision cardio-oncology</h2>
-          <p>We combine druggable-genome CRISPR screens with cancer survivors’ iPSC-derived cardiovascular cells to identify therapeutic targets that reduce anti-cancer drug-induced cardiovascular toxicity without compromising oncologic efficacy, a human-cell strategy aligned with the drug-safety goals of NAMs.</p>
+        <article class="topic" id="modeling">
+          <img src="assets/img/pericytes.jpg" alt="iPSC-cardiac pericytes">
+          <div class="topic-copy">
+            <p class="kicker">Disease modeling</p>
+            <h2>Patient iPSCs with isogenic controls</h2>
+            <p>Using patient-derived hiPSCs paired with CRISPR/Cas9-corrected isogenic controls, we dissect cardiomyopathy, pulmonary hypertension, and vascular disease. Druggable-genome CRISPR screens nominate disease drivers without bias and identify small molecules that mitigate or rescue diseased phenotypes.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1161/CIRCULATIONAHA.124.068656">Circulation 2024 · valve cells</a>
+              <a class="chip" href="https://doi.org/10.1016/j.scr.2022.102941">Stem Cell Res 2022 · TTN DCM</a>
+            </div>
+          </div>
         </article>
-        <figure class="figure-card">
-          <img src="assets/img/crispr-pipeline.jpg" alt="CRISPR screen pipeline for precision cardio-oncology">
-          <figcaption>CRISPR screen pipeline in precision cardio-oncology: iPSC cardiovascular cells, anti-cancer drugs, deep sequencing, and compound rescue.</figcaption>
-        </figure>
-        <figure class="figure-card">
-          <img src="assets/img/cardio-oncology.jpg" alt="Illustration of the heart and tumor cells for cardio-oncology">
-          <figcaption>Cardio-oncology: protect cardiovascular tissue during anti-cancer therapy.</figcaption>
-        </figure>
 
-        <article class="area">
-          <p class="mark">05</p>
-          <h2>Single-cell Perturb-seq for virtual-cell foundation models</h2>
-          <p>We are generating physiologically relevant single-cell Perturb-seq datasets in iPSC-derived cardiovascular cells to train virtual-cell foundation models, advancing scalable in silico approaches to cardiovascular research.</p>
+        <article class="topic" id="cardio-oncology">
+          <img src="assets/img/crispr-pipeline.jpg" alt="CRISPR screen pipeline for cardio-oncology">
+          <div class="topic-copy">
+            <p class="kicker">Precision cardio-oncology</p>
+            <h2>Protect the heart without losing anti-cancer efficacy</h2>
+            <p>We combine druggable-genome CRISPR screens with cancer survivors’ iPSC-derived cardiovascular cells to identify therapeutic targets that reduce anti-cancer drug-induced cardiovascular toxicity without compromising oncologic efficacy.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1002/advs.202510543">Adv Sci 2026 · cardiotoxicity</a>
+              <a class="chip" href="https://doi.org/10.1161/CIRCULATIONAHA.124.071217">Circulation 2025 · CD47</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="topic" id="perturb-seq">
+          <img src="assets/img/vessel-organoid.jpg" alt="iPSC vessel organoid">
+          <div class="topic-copy">
+            <p class="kicker">Perturb-seq</p>
+            <h2>Training data for virtual-cell models</h2>
+            <p>We are generating physiologically relevant single-cell Perturb-seq datasets in iPSC-derived cardiovascular cells to train virtual-cell foundation models, advancing scalable in silico approaches to cardiovascular research.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1126/science.adu9375">Science 2025 · gastruloids</a>
+            </div>
+          </div>
         </article>
       </div>
     </section>
@@ -299,32 +306,16 @@ RESEARCH = r"""
         </ul>
       </div>
     </section>
-
-    <section>
-      <div class="wrap">
-        <h2>Selected references</h2>
-        <ol class="refs">
-          <li>Takahashi K, et al. Induction of pluripotent stem cells from adult human fibroblasts by defined factors. <em>Cell</em>. 2007.</li>
-          <li>Lian X, et al. Robust cardiomyocyte differentiation from human pluripotent stem cells via temporal modulation of canonical Wnt signaling. <em>PNAS</em>. 2012.</li>
-          <li>Burridge PW, et al. Chemically defined generation of human cardiomyocytes. <em>Nat Methods</em>. 2014.</li>
-          <li>Wimmer RA, et al. Human blood vessel organoids as a model of diabetic vasculopathy. <em>Nature</em>. 2019.</li>
-          <li>Hofbauer P, et al. Cardioids reveal self-organizing principles of human cardiogenesis. <em>Cell</em>. 2021.</li>
-          <li>Dixit A, et al. Perturb-Seq: dissecting molecular circuits with scalable single-cell RNA profiling of pooled genetic screens. <em>Cell</em>. 2016.</li>
-          <li>Replogle JM, et al. Mapping information-rich genotype-phenotype landscapes with genome-scale Perturb-seq. <em>Cell</em>. 2022.</li>
-          <li>National Institutes of Health. NIH to Prioritize Human-Based Research Technologies. April 29, 2025.</li>
-          <li>NIH Common Fund. <a href="https://commonfund.nih.gov/complementarie">Complement-ARIE</a>.</li>
-          <li>U.S. Food and Drug Administration. Roadmap to Reducing Animal Testing in Preclinical Safety Studies. April 2025.</li>
-        </ol>
-      </div>
-    </section>
 """
 
 MODELS = r"""
-    <div class="wrap page-hero">
-      <p class="kicker">Models</p>
-      <h1>A cardiovascular cell atlas grown from hiPSCs.</h1>
-      <p class="lede">2D lineages, engineered heart tissues, vessel organoids, and vascularized cardiac organoids, plus the rooms where the work happens.</p>
-    </div>
+    <header class="masthead mast-models">
+      <div class="wrap">
+        <p class="kicker">Models</p>
+        <h1>A cardiovascular cell atlas grown from hiPSCs</h1>
+        <p class="lede">2D lineages, engineered heart tissues, vessel organoids, and vascularized cardiac organoids, plus the rooms where the work happens.</p>
+      </div>
+    </header>
 
     <section>
       <div class="wrap">
@@ -442,18 +433,23 @@ MODELS = r"""
 """
 
 PEOPLE = r"""
-    <div class="wrap page-hero">
-      <p class="kicker">People</p>
-      <h1>Mengcheng Shen, PhD</h1>
-      <p class="lede">Assistant Professor of Medicine · Assistant Professor of Developmental Biology · Washington University School of Medicine</p>
-    </div>
+    <header class="masthead mast-people">
+      <div class="wrap">
+        <p class="kicker">People</p>
+        <h1>Our team</h1>
+        <p class="lede">The lab is a growing group at the intersection of stem-cell models, CRISPR screens, and cardiovascular disease. We value careful experiments, collaboration, and questions that only human cells can answer.</p>
+      </div>
+    </header>
 
     <section>
       <div class="wrap">
+        <h2>Meet the team</h2>
         <article class="pi">
           <img src="assets/img/headshot.jpg" alt="Portrait of Mengcheng Shen, PhD">
           <div>
-            <p>The lab is led by Dr. Mengcheng Shen. His research uses high-throughput stem-cell and CRISPR-screen platforms to study novel genetic-variant and drug-induced cardiovascular pathologies, with the aim of advancing precision cardiovascular medicine.</p>
+            <p class="kicker">Principal investigator</p>
+            <h3>Mengcheng Shen, PhD</h3>
+            <p>Assistant Professor of Medicine and of Developmental Biology, Washington University School of Medicine. The lab uses high-throughput stem-cell and CRISPR-screen platforms to study genetic-variant and drug-induced cardiovascular pathologies.</p>
             <ul class="meta">
               <li>Division of Cardiology</li>
               <li>Center for Cardiovascular Research</li>
@@ -461,60 +457,183 @@ PEOPLE = r"""
               <li>Siteman Cancer Center</li>
               <li>ICTS</li>
             </ul>
-            <p>DBBS programs: Developmental, Regenerative and Stem Cell Biology; Immunology; Molecular Cell Biology; Molecular Genetics and Genomics; Neurosciences.</p>
+            <p>Training: BSc and MSc, Nanjing Agricultural University; PhD, University of Alberta, 2018.</p>
+            <div class="chips">
+              <a class="chip" href="https://cardiology.wustl.edu/people/mengcheng-shen-phd/">Faculty page</a>
+              <a class="chip" href="https://profiles.wustl.edu/en/persons/mengcheng-shen">Research profile</a>
+              <a class="chip" href="https://orcid.org/0000-0001-7037-6159">ORCID</a>
+            </div>
           </div>
         </article>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap prose">
-        <h2>Training</h2>
-        <ul>
-          <li>BSc, Nanjing Agricultural University, 2009</li>
-          <li>MSc, Nanjing Agricultural University, 2012</li>
-          <li>PhD, University of Alberta, 2018</li>
-        </ul>
-        <h2>Selected recognition</h2>
-        <ul>
-          <li>Best Poster Award, Stanford Bio-X Interdisciplinary Initiatives Seed Grants Program, 2024</li>
-          <li>Best Poster Award, Stanford–Weill Cornell Cardiovascular Research Symposium, 2022</li>
-          <li>Peter Pang Best Ph.D. Thesis Award, University of Alberta, 2018</li>
-          <li>Med Star Publication Award for Graduate Student, 2018</li>
-          <li>Dr. Francis X. Witkowski Publication Award, 2018</li>
-        </ul>
-        <h2>Profiles</h2>
-        <ul class="contact-list">
-          <li><a href="https://cardiology.wustl.edu/people/mengcheng-shen-phd/">WashU Cardiology faculty page</a></li>
-          <li><a href="https://profiles.wustl.edu/en/persons/mengcheng-shen">WashU Research Profile</a></li>
-          <li><a href="https://orcid.org/0000-0001-7037-6159">ORCID 0000-0001-7037-6159</a></li>
-        </ul>
+        <p class="lede" style="margin-top:1.5rem">The lab is recruiting. If you want to work on human iPSC cardiovascular models, CRISPR screens, or cardio-oncology, see <a href="join.html">Join</a>.</p>
       </div>
     </section>
 """
 
 JOIN = r"""
-    <div class="wrap page-hero">
-      <p class="kicker">Join</p>
-      <h1>Human cardiovascular biology, at the resolution of a CRISPR screen.</h1>
-      <p class="lede">The lab is building iPSC models, organoids, and Perturb-seq datasets for precision cardio-oncology and regenerative medicine. Trainees interested in those problems are welcome to reach out.</p>
-    </div>
+    <header class="masthead mast-join">
+      <div class="wrap">
+        <p class="kicker">Join</p>
+        <h1>Join our team</h1>
+        <p class="lede">We are looking for people who want to work at the intersection of stem-cell models, functional genomics, and cardiovascular disease.</p>
+      </div>
+    </header>
 
     <section>
       <div class="wrap prose">
-        <h2>Who we are looking for</h2>
-        <p>Dr. Shen is listed as willing to mentor PhD and MSTP students. We are especially interested in people who want to work at the intersection of stem-cell models, functional genomics, and cardiovascular disease.</p>
-        <h2>How to inquire</h2>
-        <p>Use the WashU faculty profile to start a conversation. Do not send unpublished patient data to this GitHub repository.</p>
-        <ul class="contact-list">
-          <li><a href="https://cardiology.wustl.edu/people/mengcheng-shen-phd/">cardiology.wustl.edu/people/mengcheng-shen-phd</a></li>
-          <li><a href="https://profiles.wustl.edu/en/persons/mengcheng-shen">profiles.wustl.edu/en/persons/mengcheng-shen</a></li>
-        </ul>
-        <h2>Affiliations</h2>
-        <div class="affiliations">
-          <img src="assets/img/washu-medicine.png" alt="WashU Medicine">
-          <img src="assets/img/cvr-center.png" alt="Center for Cardiovascular Research">
+        <p>The lab is recruiting postdoctoral fellows, graduate students, and other trainees. We are looking for creative, self-motivated, and collaborative people who want to advance their training in human cardiovascular biology. Candidates with experience in genomics, bioinformatics, molecular biology, iPSC culture, or CRISPR screening are encouraged.</p>
+        <p>Dr. Shen is listed as willing to mentor PhD and MSTP students at Washington University.</p>
+        <p>To inquire, start from the WashU faculty page with a short note and a CV. Do not send unpublished patient data to this GitHub repository.</p>
+        <p><a class="btn btn-primary" href="https://cardiology.wustl.edu/people/mengcheng-shen-phd/">Faculty page</a> <a class="btn btn-ghost" href="contact.html">Contact</a></p>
+      </div>
+    </section>
+"""
+
+CONTACT = r"""
+    <header class="masthead mast-contact">
+      <div class="wrap">
+        <p class="kicker">Contact</p>
+        <h1>Get in touch</h1>
+        <p class="lede">The lab is in the Division of Cardiology at Washington University School of Medicine in St. Louis.</p>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap two-col">
+        <div>
+          <h2>Inquiries</h2>
+          <p>Use the official WashU pages below. We have not posted a public email on this members-only site yet.</p>
+          <ul class="contact-list">
+            <li><a href="https://cardiology.wustl.edu/people/mengcheng-shen-phd/">cardiology.wustl.edu/people/mengcheng-shen-phd</a></li>
+            <li><a href="https://profiles.wustl.edu/en/persons/mengcheng-shen">profiles.wustl.edu/en/persons/mengcheng-shen</a></li>
+            <li><a href="https://orcid.org/0000-0001-7037-6159">ORCID 0000-0001-7037-6159</a></li>
+          </ul>
         </div>
+        <div>
+          <h2>Location</h2>
+          <p>Washington University School of Medicine<br>Division of Cardiology<br>Center for Cardiovascular Research<br>St. Louis, Missouri</p>
+          <div class="affiliations">
+            <img src="assets/img/washu-medicine.png" alt="WashU Medicine">
+            <img src="assets/img/cvr-center.png" alt="Center for Cardiovascular Research">
+          </div>
+        </div>
+      </div>
+    </section>
+"""
+
+PUBLICATIONS = r"""
+    <header class="masthead mast-pubs">
+      <div class="wrap">
+        <p class="kicker">Publications</p>
+        <h1>Selected papers</h1>
+        <p class="lede">Recent work spanning iPSC cardiovascular models, CRISPR screens, and cardio-oncology. A complete list is on the WashU research profile.</p>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap">
+        <h2>Featured</h2>
+        <div class="pub-grid">
+          <article class="pub">
+            <p class="journal">Science · 2025</p>
+            <h3>Gastruloids enable modeling of the earliest stages of human cardiac and hepatic vascularization</h3>
+            <p>Abilez OJ, Yang H, Guan Y, Shen M, et al.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1126/science.adu9375">DOI</a>
+              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/40472086/">PMID</a>
+            </div>
+          </article>
+          <article class="pub">
+            <p class="journal">Circulation · 2024</p>
+            <h3>Empowering Valvular Heart Disease Research With Stem Cell-Derived Valve Cells</h3>
+            <p>Shen M, et al.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1161/CIRCULATIONAHA.124.068656">DOI</a>
+              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/38683900/">PMID</a>
+            </div>
+          </article>
+        </div>
+
+        <p class="year">2026</p>
+        <div class="pub-grid">
+          <article class="pub">
+            <p class="journal">Advanced Science · 2026</p>
+            <h3>A Systemic Selective Modified mRNA Delivery Platform for Preventing Chemotherapy-Induced Cardiotoxicity</h3>
+            <p>Yoo J, et al., including Shen M.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1002/advs.202510543">DOI</a>
+              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/41545029/">PMID</a>
+            </div>
+          </article>
+          <article class="pub">
+            <p class="journal">Arterioscler Thromb Vasc Biol · 2026</p>
+            <h3>Generation of ciBMECs: Endothelial Cells Acquire Blood-Brain Barrier Identity and Function Through Wnt Activation</h3>
+            <p>Yang H, Zhang Y, Wang P, Wu AR, Shen M, Zhang JZ.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1161/ATVBAHA.126.324711">DOI</a>
+              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/42237909/">PMID</a>
+            </div>
+          </article>
+        </div>
+
+        <p class="year">2025</p>
+        <div class="pub-grid">
+          <article class="pub">
+            <p class="journal">Circulation · 2025</p>
+            <h3>Human Single-Nucleus RNA Sequencing Identifies CD47 as a Therapeutic Target for Doxorubicin-Induced Cardiomyopathy</h3>
+            <p>Guo Z, et al., including Shen M.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1161/CIRCULATIONAHA.124.071217">DOI</a>
+              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/40808662/">PMID</a>
+            </div>
+          </article>
+        </div>
+
+        <p class="year">2024</p>
+        <div class="pub-grid">
+          <article class="pub">
+            <p class="journal">Cell Stem Cell · 2024</p>
+            <h3>CRISPRi/a screens in human iPSC-cardiomyocytes identify glycolytic activation as a druggable pathway</h3>
+            <p>Liu C, et al., including Shen M.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1016/j.stem.2024.10.007">DOI</a>
+              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/39515331/">PMID</a>
+            </div>
+          </article>
+          <article class="pub">
+            <p class="journal">Stem Cell Research &amp; Therapy · 2024</p>
+            <h3>BCL6B-dependent suppression of ETV2 hampers endothelial cell differentiation</h3>
+            <p>Li Z, et al., including Shen M.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1186/s13287-024-03832-y">DOI</a>
+              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/39075623/">PMID</a>
+            </div>
+          </article>
+        </div>
+
+        <p class="year">2023</p>
+        <div class="pub-grid">
+          <article class="pub">
+            <p class="journal">Circulation · 2023</p>
+            <h3>Stepwise Generation of Human Induced Pluripotent Stem Cell-Derived Cardiac Pericytes to Model Coronary Microvascular Dysfunction</h3>
+            <p>Shen M, Liu C, Zhao SR, Manhas A, Sundaram L, Ameen M, Wu JC.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1161/CIRCULATIONAHA.122.061770">DOI</a>
+              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/36745700/">PMID</a>
+            </div>
+          </article>
+          <article class="pub">
+            <p class="journal">STAR Protocols · 2023</p>
+            <h3>Protocol to generate cardiac pericytes from human induced pluripotent stem cells</h3>
+            <p>Shen M, Zhao SR, Khokhar Y, Li L, Zhou Y, Liu C, Wu JC.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1016/j.xpro.2023.102256">DOI</a>
+              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/37119139/">PMID</a>
+            </div>
+          </article>
+        </div>
+
+        <p>For a complete list, see the <a href="https://profiles.wustl.edu/en/persons/mengcheng-shen/publications/">WashU research profile</a>.</p>
       </div>
     </section>
 """
@@ -523,33 +642,50 @@ JOIN = r"""
 def main() -> None:
     pages = {
         "index.html": (
+            "index.html",
             "Shen Lab · Cardiovascular Precision Medicine",
             "Cardiovascular Precision Medicine Lab at WashU Medicine, led by Mengcheng Shen, PhD.",
             HOME,
         ),
         "research.html": (
+            "research.html",
             "Research · Shen Lab",
-            "Five research areas of the Shen Lab: differentiation, CRISPR screens, disease modeling, cardio-oncology, and Perturb-seq.",
+            "Research programs of the Shen Lab: differentiation, CRISPR screens, disease modeling, cardio-oncology, and Perturb-seq.",
             RESEARCH,
         ),
         "models.html": (
+            "models.html",
             "Models · Shen Lab",
             "iPSC-derived cardiovascular cell types, organoids, engineered heart tissues, and lab spaces.",
             MODELS,
         ),
         "people.html": (
+            "people.html",
             "People · Shen Lab",
             "Mengcheng Shen, PhD, principal investigator of the Cardiovascular Precision Medicine Lab.",
             PEOPLE,
         ),
         "join.html": (
+            "join.html",
             "Join · Shen Lab",
             "Join the Cardiovascular Precision Medicine Lab at Washington University School of Medicine.",
             JOIN,
         ),
+        "contact.html": (
+            "contact.html",
+            "Contact · Shen Lab",
+            "Contact the Cardiovascular Precision Medicine Lab at WashU Medicine.",
+            CONTACT,
+        ),
+        "publications.html": (
+            "publications.html",
+            "Publications · Shen Lab",
+            "Selected publications from the Shen Lab and collaborators.",
+            PUBLICATIONS,
+        ),
     }
-    for name, (title, desc, body) in pages.items():
-        (ROOT / name).write_text(page(name, title, desc, body), encoding="utf-8")
+    for name, (active, title, desc, body) in pages.items():
+        (ROOT / name).write_text(page(active, title, desc, body), encoding="utf-8")
         print("wrote", name)
 
 

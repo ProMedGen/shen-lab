@@ -8,9 +8,6 @@
   --white: #ffffff;
   --line: #d5dbe6;
   --stage: #07080d;
-  --stage-ink: #e8edf6;
-  --washu: #a51417;
-  --shadow: 0 18px 50px rgba(20, 32, 74, 0.08);
   --max: 1120px;
 }
 
@@ -67,10 +64,10 @@ a:hover {
 .banner {
   background: var(--navy);
   color: #dbe4f5;
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   letter-spacing: 0.04em;
   text-align: center;
-  padding: 0.45rem 1rem;
+  padding: 0.4rem 1rem;
 }
 
 .banner strong {
@@ -86,10 +83,10 @@ a:hover {
   z-index: 20;
 }
 
-.header-inner {
+.header-top {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 0.7rem 1.25rem;
+  padding: 0.75rem 1.25rem 0.35rem;
   display: flex;
   align-items: center;
   gap: 1.25rem;
@@ -105,8 +102,8 @@ a:hover {
 }
 
 .brand img {
-  width: 52px;
-  height: 52px;
+  width: 54px;
+  height: 54px;
   object-fit: contain;
 }
 
@@ -118,7 +115,7 @@ a:hover {
 
 .brand-text strong {
   font-family: Fraunces, Georgia, serif;
-  font-size: 1.02rem;
+  font-size: 1.05rem;
   color: var(--navy);
   font-weight: 600;
 }
@@ -128,31 +125,13 @@ a:hover {
   color: var(--muted);
 }
 
-nav {
+.tagline {
   margin-left: auto;
-}
-
-nav ul {
-  display: flex;
-  gap: 0.2rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-nav a {
-  color: var(--navy);
-  text-decoration: none;
-  padding: 0.45rem 0.7rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  border-radius: 999px;
-}
-
-nav a:hover,
-nav a[aria-current="page"] {
-  background: #eef2fa;
+  font-family: Fraunces, Georgia, serif;
   color: var(--blue);
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: right;
 }
 
 .menu-toggle {
@@ -166,18 +145,102 @@ nav a[aria-current="page"] {
   color: var(--navy);
 }
 
+.nav-bar {
+  border-top: 1px solid var(--line);
+}
+
+nav {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 0.6rem;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: var(--navy);
+  text-decoration: none;
+  padding: 0.7rem 0.55rem;
+  font-weight: 650;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: block;
+}
+
+nav a:hover,
+nav a[aria-current="page"] {
+  color: var(--blue);
+  box-shadow: inset 0 -2px 0 var(--blue);
+}
+
 .wrap {
   max-width: var(--max);
   margin: 0 auto;
   padding: 0 1.25rem;
 }
 
-.hero {
+.hero-bleed {
+  position: relative;
+  min-height: 72vh;
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: 2.2rem;
-  align-items: center;
-  padding: 3.2rem 0 2.4rem;
+  align-items: end;
+  color: #fff;
+  overflow: hidden;
+  background: var(--stage);
+}
+
+.hero-bleed video,
+.hero-bleed img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-bleed::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 8, 13, 0.15) 10%, rgba(7, 8, 13, 0.72) 100%);
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 4.5rem 1.25rem 3rem;
+}
+
+.hero-copy h1 {
+  color: #fff;
+  font-size: clamp(2.1rem, 5vw, 3.6rem);
+  margin: 0 0 1rem;
+  max-width: 16ch;
+}
+
+.hero-copy .lede {
+  color: #e4eaf4;
+  max-width: 38rem;
+}
+
+.hero-copy .btn-ghost {
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #fff;
+}
+
+.hero-copy .btn-ghost:hover {
+  border-color: #fff;
+  color: #fff;
 }
 
 .kicker {
@@ -187,6 +250,10 @@ nav a[aria-current="page"] {
   text-transform: uppercase;
   color: var(--red);
   margin: 0 0 0.7rem;
+}
+
+.hero-copy .kicker {
+  color: #f3c7cf;
 }
 
 h1,
@@ -220,7 +287,8 @@ h3 {
   margin: 0 0 1.2rem;
 }
 
-.hero-actions {
+.hero-actions,
+.actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.7rem;
@@ -258,23 +326,14 @@ h3 {
   color: var(--blue);
 }
 
-.hero-media {
-  background: var(--stage);
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  position: relative;
+.btn-light {
+  background: #fff;
+  color: var(--navy);
 }
 
-.hero-media video,
-.hero-media img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-}
-
-.hero-media img {
-  display: none;
+.btn-light:hover {
+  background: #eef2fa;
+  color: var(--navy);
 }
 
 .caption {
@@ -285,13 +344,25 @@ h3 {
   line-height: 1.45;
 }
 
-.caption.light {
-  color: var(--muted);
-  padding: 0.45rem 0 0;
+section {
+  padding: 2.6rem 0;
 }
 
-section {
-  padding: 2.4rem 0;
+.mission {
+  max-width: 48rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.mission h2 {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+.mission p {
+  text-align: left;
 }
 
 .section-head {
@@ -299,33 +370,64 @@ section {
   margin-bottom: 1.4rem;
 }
 
-.areas {
+.programs {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.85rem;
 }
 
-.areas .area:last-child {
-  grid-column: 1 / -1;
+@media (min-width: 901px) {
+  .programs {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .program {
+    grid-column: span 2;
+  }
+
+  .program:nth-child(4) {
+    grid-column: 2 / span 2;
+  }
+
+  .program:nth-child(5) {
+    grid-column: 4 / span 2;
+  }
 }
 
-.area {
+.program {
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: 16px;
-  padding: 1.15rem 1.2rem 1.2rem;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
 }
 
-.area .mark {
-  font-family: "IBM Plex Mono", ui-monospace, monospace;
-  font-size: 0.72rem;
-  color: var(--blue);
-  margin: 0 0 0.4rem;
+.program img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--stage);
 }
 
-.area p {
+.program div {
+  padding: 0.9rem 1rem 1.1rem;
+}
+
+.program h3 {
+  margin: 0 0 0.3rem;
+}
+
+.program p {
   margin: 0;
   color: #3a4354;
+  font-size: 0.95rem;
+}
+
+.program:hover h3 {
+  color: var(--blue);
 }
 
 .wide-figure {
@@ -432,7 +534,7 @@ section {
 
 .stack {
   display: grid;
-  gap: 1.4rem;
+  gap: 1.6rem;
 }
 
 .figure-card {
@@ -459,6 +561,148 @@ section {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
+}
+
+.topic {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 1.5rem;
+  align-items: start;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.topic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-height: 240px;
+  background: var(--stage);
+}
+
+.topic-copy {
+  padding: 1.3rem;
+}
+
+.topic:nth-child(even) {
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+.topic:nth-child(even) img {
+  order: 2;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.8rem;
+}
+
+.chip {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.72rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.18rem 0.55rem;
+  text-decoration: none;
+  color: var(--navy);
+}
+
+.chip:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+
+.pub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.pub {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.1rem 1.15rem 1.2rem;
+}
+
+.pub .journal {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 0.75rem;
+  color: var(--blue);
+  margin: 0 0 0.45rem;
+}
+
+.pub h3 {
+  font-size: 1.05rem;
+}
+
+.pub p {
+  margin: 0 0 0.7rem;
+  color: #3a4354;
+  font-size: 0.95rem;
+}
+
+.masthead {
+  position: relative;
+  color: #fff;
+  background: var(--navy) center/cover no-repeat;
+  padding: 3.6rem 0 2.6rem;
+}
+
+.masthead::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(20, 32, 74, 0.82), rgba(20, 32, 74, 0.45));
+}
+
+.masthead .wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.masthead h1,
+.masthead .lede,
+.masthead .kicker {
+  color: #fff;
+}
+
+.masthead .lede {
+  max-width: 38rem;
+}
+
+.mast-research {
+  background-image: url("../assets/img/cm-ctnt.jpg");
+}
+
+.mast-models {
+  background-image: url("../assets/img/vessel-organoid.jpg");
+}
+
+.mast-people {
+  background-image: url("../assets/img/lab-space.jpg");
+}
+
+.mast-join {
+  background-image: url("../assets/img/tissue-culture.jpg");
+}
+
+.mast-contact {
+  background-image: url("../assets/img/research-overview.jpg");
+}
+
+.mast-pubs {
+  background-image: url("../assets/img/endothelial-protocol.jpg");
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
 }
 
 .refs {
@@ -491,8 +735,11 @@ section {
   margin: 0 0 0.55rem;
 }
 
-.page-hero {
-  padding: 2.4rem 0 0.4rem;
+.year {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--red);
+  letter-spacing: 0.08em;
+  margin: 1.6rem 0 0.7rem;
 }
 
 .site-footer {
@@ -523,23 +770,25 @@ section {
   outline-offset: 2px;
 }
 
-@media (max-width: 860px) {
+@media (max-width: 900px) {
+  .tagline {
+    display: none;
+  }
+
   .menu-toggle {
     display: inline-flex;
   }
 
-  nav {
+  .nav-bar {
     display: none;
     position: absolute;
     left: 0;
     right: 0;
-    top: 100%;
     background: var(--white);
     border-bottom: 1px solid var(--line);
-    padding: 0.5rem 1rem 0.8rem;
   }
 
-  nav.open {
+  .nav-bar.open {
     display: block;
   }
 
@@ -547,21 +796,37 @@ section {
     flex-direction: column;
   }
 
-  .hero,
+  nav a {
+    box-shadow: none;
+    padding: 0.7rem 1.25rem;
+  }
+
+  .site-header {
+    position: sticky;
+  }
+
+  .header-top {
+    position: relative;
+  }
+
+  .programs,
   .nams,
   .pi,
   .footer-inner,
   .gallery,
-  .areas {
+  .pub-grid,
+  .two-col,
+  .topic,
+  .topic:nth-child(even) {
     grid-template-columns: 1fr;
+  }
+
+  .topic:nth-child(even) img {
+    order: 0;
   }
 
   .mosaic {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .header-inner {
-    position: relative;
   }
 }
 
@@ -570,11 +835,7 @@ section {
     scroll-behavior: auto;
   }
 
-  .hero-media video {
+  .hero-bleed video {
     display: none;
-  }
-
-  .hero-media img {
-    display: block;
   }
 }
