@@ -653,24 +653,40 @@ CONTACT = r"""
       <div class="wrap">
         <p class="kicker">Contact</p>
         <h1>Get in touch</h1>
-        <p class="lede">The lab is in the Division of Cardiology at Washington University School of Medicine in St. Louis.</p>
+        <p class="lede">Write to Dr. Shen, or visit the lab on the WashU Medical Center campus in St. Louis.</p>
       </div>
     </header>
 
     <section>
       <div class="wrap contact-grid">
         <div>
-          <h2>Inquiries</h2>
-          <p>Use the official WashU pages below. We have not posted a public email on this members-only site yet.</p>
-          <ul class="contact-list">
-            <li><a href="https://cardiology.wustl.edu/people/mengcheng-shen-phd/">cardiology.wustl.edu/people/mengcheng-shen-phd</a></li>
-            <li><a href="https://profiles.wustl.edu/en/persons/mengcheng-shen">profiles.wustl.edu/en/persons/mengcheng-shen</a></li>
-            <li><a href="https://orcid.org/0000-0001-7037-6159">ORCID 0000-0001-7037-6159</a></li>
-          </ul>
-          <h2>Location</h2>
-          <p>The Cardiovascular Division administrative offices are on the WashU Medical Center campus:</p>
-          <p>
-            WashU Medical Center<br>
+          <h2>Principal investigator</h2>
+          <p class="contact-name">Mengcheng Shen, PhD</p>
+          <p>Assistant Professor of Medicine and of Developmental Biology<br>Division of Cardiology, WashU Medicine</p>
+          <dl class="contact-dl">
+            <div>
+              <dt>Email</dt>
+              <dd><a href="mailto:shen.m@wustl.edu">shen.m@wustl.edu</a></dd>
+            </div>
+            <div>
+              <dt>Faculty</dt>
+              <dd><a href="https://cardiology.wustl.edu/people/mengcheng-shen-phd/">Cardiology faculty page</a></dd>
+            </div>
+            <div>
+              <dt>Profile</dt>
+              <dd><a href="https://profiles.wustl.edu/en/persons/mengcheng-shen">WashU Research Profiles</a></dd>
+            </div>
+            <div>
+              <dt>ORCID</dt>
+              <dd><a href="https://orcid.org/0000-0001-7037-6159">0000-0001-7037-6159</a></dd>
+            </div>
+          </dl>
+          <p><a class="btn btn-primary" href="mailto:shen.m@wustl.edu">Email Dr. Shen</a> <a class="btn btn-ghost" href="join.html">Join the lab</a></p>
+        </div>
+        <div>
+          <h2>Visit</h2>
+          <p>Cardiovascular Division administrative offices, WashU Medical Center campus:</p>
+          <p class="contact-address">
             4940 Parkview Place<br>
             St. Louis, MO 63110
           </p>
@@ -681,7 +697,12 @@ CONTACT = r"""
             <img class="logo-cvr" src="assets/img/cvr-center.png" alt="Center for Cardiovascular Research">
           </div>
         </div>
-        <div class="map-embed">
+      </div>
+    </section>
+
+    <section class="map-band">
+      <div class="wrap">
+        <div class="map-embed map-embed-large">
           <iframe title="Map of WashU Medical Center, 4940 Parkview Place, St. Louis"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3116.4!2d-90.2638319!3d38.6382822!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87d8b4c6%3A0x0!2s4940%20Parkview%20Place%2C%20St.%20Louis%2C%20MO%2063110!5e0!3m2!1sen!2sus!4v1710000000000!5m2!1sen!2sus"
             loading="lazy"
