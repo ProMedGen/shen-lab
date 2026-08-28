@@ -947,7 +947,6 @@ def build_publications() -> str:
       <div class="wrap">
         <p class="kicker">Publications</p>
         <h1>Publications</h1>
-        <p class="lede">Papers from the lab and collaborators.</p>
       </div>
     </header>
 
