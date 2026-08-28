@@ -353,7 +353,7 @@ MODELS = r"""
           <h2>Beating cells and tissues</h2>
           <p>Beating monolayers and engineered heart tissues recorded in culture.</p>
         </div>
-        <div class="clip-row">
+        <div class="clip-row clip-row-43">
           <figure class="specimen">
             <div class="specimen-stage">
               <video controls playsinline poster="assets/img/cm-beating-poster.jpg">
@@ -377,7 +377,7 @@ MODELS = r"""
             </figcaption>
           </figure>
         </div>
-        <div class="clip-row clip-row-tall">
+        <div class="clip-row clip-row-portrait">
           <figure class="specimen">
             <div class="specimen-stage">
               <video controls playsinline>
@@ -413,42 +413,54 @@ MODELS = r"""
         </div>
         <div class="atlas-grid">
           <figure class="specimen">
+            <div class="specimen-stage">
             <img src="assets/img/cm-ctnt.jpg" alt="iPSC-cardiomyocytes, cardiac troponin T in red">
+            </div>
             <figcaption>
               <strong>Cardiomyocytes</strong>
               <span>Cardiac troponin T</span>
             </figcaption>
           </figure>
           <figure class="specimen">
+            <div class="specimen-stage">
             <img src="assets/img/epicardial.jpg" alt="iPSC-epicardial cells, ZO-1 red and WT1 cyan">
+            </div>
             <figcaption>
               <strong>Epicardial cells</strong>
               <span>ZO-1 and WT1</span>
             </figcaption>
           </figure>
           <figure class="specimen">
+            <div class="specimen-stage">
             <img src="assets/img/pericytes.jpg" alt="iPSC-cardiac pericytes">
+            </div>
             <figcaption>
               <strong>Cardiac pericytes</strong>
               <span>αSMA and PDGFRβ</span>
             </figcaption>
           </figure>
           <figure class="specimen">
+            <div class="specimen-stage">
             <img src="assets/img/fibroblasts.jpg" alt="iPSC-cardiac fibroblasts">
+            </div>
             <figcaption>
               <strong>Cardiac fibroblasts</strong>
               <span>TE-7</span>
             </figcaption>
           </figure>
           <figure class="specimen">
+            <div class="specimen-stage">
             <img src="assets/img/smc-myh11.jpg" alt="iPSC-cardiac smooth muscle cells">
+            </div>
             <figcaption>
               <strong>Smooth muscle cells</strong>
               <span>MYH11</span>
             </figcaption>
           </figure>
           <figure class="specimen">
+            <div class="specimen-stage">
             <img src="assets/img/endothelial-protocol.jpg" alt="Endothelial differentiation figure">
+            </div>
             <figcaption>
               <strong>Endothelial protocol</strong>
               <span>CD144, CD31, eNOS, vWF</span>
@@ -465,7 +477,7 @@ MODELS = r"""
           <h2>Organoids</h2>
           <p>Cardiac organoids, vascularized cardiac organoids, and vessel organoids.</p>
         </div>
-        <div class="clip-row">
+        <div class="clip-row clip-row-43">
           <figure class="specimen">
             <div class="specimen-stage">
               <video controls playsinline poster="assets/img/cardiac-organoid-poster.jpg">
@@ -489,9 +501,11 @@ MODELS = r"""
             </figcaption>
           </figure>
         </div>
-        <div class="clip-row">
+        <div class="clip-row clip-row-43">
           <figure class="specimen">
+            <div class="specimen-stage">
             <img src="assets/img/vessel-organoid.jpg" alt="iPSC vessel organoid stained for DAPI, VE-cadherin, CD31, PDGFRβ">
+            </div>
             <figcaption>
               <strong>Vessel organoid</strong>
               <span>DAPI, VE-cadherin, CD31, PDGFRβ</span>
@@ -519,7 +533,7 @@ MODELS = r"""
           <h2>Lab spaces</h2>
           <p>Where the cultures are grown.</p>
         </div>
-        <div class="clip-row">
+        <div class="clip-row clip-row-169">
           <figure class="specimen">
             <div class="specimen-stage">
               <video controls playsinline poster="assets/img/lab-space.jpg">
