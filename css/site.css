@@ -9,6 +9,9 @@
   --line: #d5dbe6;
   --stage: #07080d;
   --max: 1120px;
+  /* Height of the sticky header. js/site.js keeps this in sync with the real
+     measured height; the value here is the desktop fallback. */
+  --header-h: 184px;
 }
 
 *,
@@ -19,6 +22,12 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+/* The header is sticky, so an un-offset anchor jump parks the target
+   underneath it. Applies to every id so future anchors are covered too. */
+[id] {
+  scroll-margin-top: calc(var(--header-h) + 1.25rem);
 }
 
 body {
@@ -770,7 +779,10 @@ section {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.2rem;
-  align-items: stretch;
+  /* Wells are sized to each clip's own aspect ratio, so heights differ within
+     a row. Aligning to the top reads as intentional; stretching would force a
+     letterbox back in. */
+  align-items: start;
   margin-bottom: 1.2rem;
 }
 
@@ -778,8 +790,9 @@ section {
   margin-bottom: 0;
 }
 
-.clip-row-portrait {
-  max-width: 40rem;
+/* Portrait clips: narrow the row so a 9:16 well does not become a tower. */
+.clip-row-tall {
+  max-width: 32rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -787,7 +800,6 @@ section {
 .specimen {
   display: flex;
   flex-direction: column;
-  height: 100%;
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -795,28 +807,30 @@ section {
   min-width: 0;
 }
 
+/* --stage-ratio is written inline by scripts/build_pages.py from the real
+   pixel dimensions of the clip or still, so object-fit never has to letterbox
+   or crop. The fallback only applies if the file could not be measured. */
 .specimen-stage {
   position: relative;
   flex: 0 0 auto;
   width: 100%;
+  aspect-ratio: var(--stage-ratio, 4 / 3);
   background: var(--stage);
   overflow: hidden;
 }
 
-.clip-row-43 .specimen-stage {
-  aspect-ratio: 4 / 3;
-}
-
-.clip-row-169 .specimen-stage {
-  aspect-ratio: 16 / 9;
-}
-
-.clip-row-portrait .specimen-stage {
-  aspect-ratio: 9 / 16;
-}
-
+/* The lineage gallery is deliberately a uniform grid of squares. These are
+   stain fields, so cropping loses nothing. */
 .atlas-grid .specimen-stage {
   aspect-ratio: 1 / 1;
+}
+
+.atlas-grid .specimen-stage img {
+  object-fit: cover;
+}
+
+.specimen-wide {
+  margin-top: 1rem;
 }
 
 .specimen-stage video,
@@ -832,7 +846,6 @@ section {
 
 .specimen figcaption {
   flex: 1 0 auto;
-  min-height: 5.6rem;
   padding: 0.9rem 1.05rem 1.05rem;
 }
 
@@ -1114,6 +1127,10 @@ nav.year-nav a:focus {
   background-image: url("../assets/img/lab-space.jpg");
 }
 
+.mast-404 {
+  background-image: url("../assets/img/epicardial.jpg");
+}
+
 .news-list {
   display: flex;
   flex-direction: column;
@@ -1148,7 +1165,7 @@ nav.year-nav a:focus {
   padding: 0.18rem 0.55rem;
 }
 
-.news-item h3 {
+.news-title {
   font-family: "Source Sans 3", sans-serif;
   font-size: 1.12rem;
   font-style: normal;
@@ -1156,12 +1173,12 @@ nav.year-nav a:focus {
   margin: 0 0 0.4rem;
 }
 
-.news-item h3 a {
+.news-title a {
   color: var(--navy);
   text-decoration: none;
 }
 
-.news-item h3 a:hover {
+.news-title a:hover {
   color: var(--blue);
   text-decoration: underline;
 }
@@ -1383,6 +1400,10 @@ h2.year {
 }
 
 @media (max-width: 900px) {
+  :root {
+    --header-h: 104px;
+  }
+
   .tagline {
     display: none;
   }
@@ -1441,7 +1462,6 @@ h2.year {
     height: 80px;
   }
 
-  .programs,
   .nams,
   .pi,
   .footer-inner,
@@ -1451,6 +1471,12 @@ h2.year {
   .contact-grid,
   .cv-honors-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Two columns keeps the five programme cards scannable instead of turning
+     the home page into a long single-file scroll. */
+  .programs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .cv-list li,
@@ -1532,16 +1558,12 @@ h2.year {
     grid-template-columns: 1fr;
   }
 
-  .clip-row-portrait {
-    max-width: 20rem;
+  .clip-row-tall {
+    max-width: 18rem;
   }
 
   .atlas-grid {
     grid-template-columns: 1fr 1fr;
-  }
-
-  .specimen figcaption {
-    min-height: 0;
   }
 
   .specimen figcaption strong {
@@ -1556,5 +1578,76 @@ h2.year {
 
   .hero-bleed video {
     display: none;
+  }
+}
+
+/* Publication lists get printed and handed round in lab meetings, so make the
+   printed page legible: drop chrome, un-invert dark figures, expose link URLs. */
+@media print {
+  :root {
+    --header-h: 0px;
+  }
+
+  body {
+    background: #fff;
+    font-size: 10.5pt;
+  }
+
+  .site-header,
+  .site-footer,
+  .skip,
+  .menu-toggle,
+  .year-nav,
+  .pub-metrics,
+  .map-embed,
+  .hero-actions,
+  video {
+    display: none !important;
+  }
+
+  .masthead {
+    padding: 0 0 1rem;
+    color: var(--ink);
+    background: none;
+  }
+
+  .masthead::after {
+    display: none;
+  }
+
+  .masthead h1,
+  .masthead .lede,
+  .masthead .kicker {
+    color: var(--ink);
+  }
+
+  .pub-row {
+    grid-template-columns: 1fr;
+    break-inside: avoid;
+  }
+
+  .news-item,
+  .specimen,
+  .topic,
+  .program {
+    break-inside: avoid;
+  }
+
+  .specimen-stage,
+  .figure-dark,
+  .wide-figure,
+  .tile {
+    background: #fff;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    word-break: break-all;
+  }
+
+  .chips a[href^="http"]::after,
+  nav a[href^="http"]::after {
+    content: "";
   }
 }

@@ -3,10 +3,31 @@
 
 import html
 import json
+import re
+import subprocess
 from collections import defaultdict
+from functools import lru_cache
 from pathlib import Path
 
-ROOT = Path("/Volumes/CrucialX10A/Apps/Website/Shen_Lab")
+ROOT = Path(__file__).resolve().parent.parent
+
+# ---------------------------------------------------------------------------
+# Launch switch.
+#
+# While PUBLIC is False the site stays out of search indexes: every page emits
+# `noindex, nofollow` and robots.txt disallows everything, which matches the
+# private GitHub Pages deployment. Flipping this to True and rebuilding is the
+# whole SEO half of going live -- see the launch checklist in README.md.
+# ---------------------------------------------------------------------------
+PUBLIC = False
+
+# Absolute base for canonical and social-preview URLs, no trailing slash.
+# Replace with the public hostname (or custom domain) when PUBLIC becomes True.
+SITE_URL = "https://super-adventure-gwynznl.pages.github.io"
+
+SITE_NAME = "Shen Lab"
+SOCIAL_IMAGE = "assets/img/cm-ctnt.jpg"
+SOCIAL_IMAGE_ALT = "iPSC-derived cardiomyocytes stained for cardiac troponin T"
 
 NAV = [
     ("research.html", "Research"),
@@ -18,6 +39,15 @@ NAV = [
     ("contact.html", "Contact"),
 ]
 
+# Clips whose poster frame is stored under a curated name rather than
+# "<stem>-poster.jpg". Kept in sync with scripts/make_posters.py.
+POSTER_OVERRIDES = {
+    "cm-beating.mp4": "cm-beating-poster.jpg",
+    "cardiac-organoids.mp4": "cardiac-organoid-poster.jpg",
+    "lab-space.mp4": "lab-space.jpg",
+    "tissue-culture.mp4": "tissue-culture.jpg",
+}
+
 
 def nav_html(active: str) -> str:
     items = []
@@ -27,7 +57,135 @@ def nav_html(active: str) -> str:
     return "\n".join(items)
 
 
+# ---------------------------------------------------------------------------
+# Media hardening
+#
+# The page templates below carry plain <img> and <video> tags so they stay
+# readable. Sizing, lazy-loading and poster wiring are applied here instead, in
+# one pass over the generated markup, using the real dimensions of the files on
+# disk. Hand-maintaining ~60 width/height pairs would drift the first time an
+# asset is re-exported.
+# ---------------------------------------------------------------------------
+
+@lru_cache(maxsize=None)
+def _image_size(rel: str) -> tuple[int, int] | None:
+    path = ROOT / rel
+    if not path.exists():
+        return None
+    if path.suffix.lower() == ".svg":
+        # An SVG has no pixel size; its viewBox carries the intrinsic ratio,
+        # which is all width/height attributes are for here.
+        box = re.search(r'viewBox="([\d.\s-]+)"', path.read_text(encoding="utf-8"))
+        if not box:
+            return None
+        parts = box.group(1).split()
+        if len(parts) != 4:
+            return None
+        return round(float(parts[2])), round(float(parts[3]))
+    try:
+        from PIL import Image
+    except ImportError:
+        return None
+    with Image.open(path) as im:
+        return im.width, im.height
+
+
+@lru_cache(maxsize=None)
+def _video_size(rel: str) -> tuple[int, int] | None:
+    path = ROOT / rel
+    if not path.exists():
+        return None
+    try:
+        out = subprocess.run(
+            ["ffprobe", "-v", "error", "-select_streams", "v:0",
+             "-show_entries", "stream=width,height", "-of", "csv=p=0:s=x", str(path)],
+            check=True, capture_output=True, text=True,
+        ).stdout.strip().split("x")
+        return int(out[0]), int(out[1])
+    except (subprocess.CalledProcessError, FileNotFoundError, ValueError, IndexError):
+        return None
+
+
+def _poster_for(video_rel: str) -> str | None:
+    name = Path(video_rel).name
+    poster = POSTER_OVERRIDES.get(name, f"{Path(name).stem}-poster.jpg")
+    rel = f"assets/img/{poster}"
+    return rel if (ROOT / rel).exists() else None
+
+
+def enhance_media(markup: str) -> str:
+    """Add intrinsic sizing, loading hints, and video posters to a page body."""
+
+    def fix_img(match: re.Match) -> str:
+        tag, attrs = match.group(0), match.group(1)
+        src = re.search(r'src="([^"]+)"', attrs)
+        if not src:
+            return tag
+        additions = []
+        if "width=" not in attrs:
+            size = _image_size(src.group(1))
+            if size:
+                additions.append(f'width="{size[0]}" height="{size[1]}"')
+        if "decoding=" not in attrs:
+            additions.append('decoding="async"')
+        # An above-the-fold image is marked in the template with
+        # fetchpriority="high". Everything else defers, so the same file can be
+        # the eager hero in one place and a lazy thumbnail in another.
+        if "loading=" not in attrs and "fetchpriority=" not in attrs:
+            additions.append('loading="lazy"')
+        if not additions:
+            return tag
+        return f"<img{attrs} {' '.join(additions)}>"
+
+    def fix_video(match: re.Match) -> str:
+        attrs, source_rel = match.group(1), match.group(2)
+        additions = []
+        # preload="none" keeps the Models page from downloading every clip up
+        # front; the poster stands in until a visitor presses play.
+        if "preload=" not in attrs:
+            additions.append('preload="none"')
+        if "poster=" not in attrs:
+            poster = _poster_for(source_rel)
+            if poster:
+                additions.append(f'poster="{poster}"')
+        head = f"<video{attrs}{' ' + ' '.join(additions) if additions else ''}>"
+        return head + match.group(0)[match.group(0).index(">") + 1:]
+
+    markup = re.sub(r"<img((?:[^>]|\n)*?)>", fix_img, markup)
+    markup = re.sub(
+        r'<video((?:[^>]|\n)*?)>\s*<source src="([^"]+)"',
+        fix_video,
+        markup,
+    )
+    return markup
+
+
+def stage_ratio(media_rel: str) -> str:
+    """Inline aspect ratio for a .specimen-stage well, from the real media.
+
+    Sizing each well to its own clip means object-fit never has to letterbox or
+    crop, which is what produced the black bars around the tall EHT brightfield
+    clip and the square vessel-organoid still.
+    """
+    size = _video_size(media_rel) if media_rel.endswith(".mp4") else _image_size(media_rel)
+    if not size:
+        # Falling back silently would emit different HTML than a machine with
+        # the tooling installed, so the stale-output check in CI would flap.
+        raise SystemExit(
+            f"cannot measure {media_rel}: install ffmpeg (ffprobe) and pillow, "
+            "see requirements.txt"
+        )
+    return f' style="--stage-ratio: {size[0]} / {size[1]}"'
+
+
 def page(active: str, title: str, description: str, body: str, extra_scripts: str = "") -> str:
+    robots = (
+        '<meta name="robots" content="index, follow">'
+        if PUBLIC
+        else '<meta name="robots" content="noindex, nofollow">'
+    )
+    canonical = f"{SITE_URL}/{active}"
+    social = f"{SITE_URL}/{SOCIAL_IMAGE}"
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,8 +193,19 @@ def page(active: str, title: str, description: str, body: str, extra_scripts: st
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{title}</title>
   <meta name="description" content="{description}">
-  <meta name="robots" content="noindex, nofollow">
+  {robots}
+  <link rel="canonical" href="{canonical}">
+  <meta name="theme-color" content="#14204a">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{SITE_NAME}">
+  <meta property="og:title" content="{title}">
+  <meta property="og:description" content="{description}">
+  <meta property="og:url" content="{canonical}">
+  <meta property="og:image" content="{social}">
+  <meta property="og:image:alt" content="{SOCIAL_IMAGE_ALT}">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="assets/img/logo.png">
+  <link rel="apple-touch-icon" href="assets/img/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
@@ -47,7 +216,7 @@ def page(active: str, title: str, description: str, body: str, extra_scripts: st
   <header class="site-header">
     <div class="header-top">
       <a class="brand" href="index.html">
-        <img src="assets/img/logo.png" alt="Shen Lab logo">
+        <img src="assets/img/logo.png" alt="Shen Lab logo" width="594" height="669" fetchpriority="high">
         <span class="brand-text">
           <strong>Shen Lab</strong>
           <span>WashU Medicine</span>
@@ -65,12 +234,12 @@ def page(active: str, title: str, description: str, body: str, extra_scripts: st
     </div>
   </header>
   <main id="content">
-{body}
+{enhance_media(body)}
   </main>
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <a class="footer-brand" href="index.html">
-        <img src="assets/img/logo.png" alt="Shen Lab, Cardiovascular Precision Medicine Lab">
+        <img src="assets/img/logo.png" alt="Shen Lab, Cardiovascular Precision Medicine Lab" width="594" height="669" loading="lazy" decoding="async">
         <span class="footer-brand-text">
           <strong>Shen Lab</strong>
           <span>Cardiovascular Precision Medicine Lab</span>
@@ -79,8 +248,8 @@ def page(active: str, title: str, description: str, body: str, extra_scripts: st
       <div class="footer-affiliations">
         <p class="footer-copy">Division of Cardiology · Center for Cardiovascular Research · Washington University School of Medicine in St. Louis</p>
         <div class="affiliations">
-          <img class="logo-washu" src="assets/img/washu-medicine.svg" alt="WashU Medicine">
-          <img class="logo-cvr" src="assets/img/cvr-center.png" alt="Center for Cardiovascular Research">
+          <img class="logo-washu" src="assets/img/washu-medicine.svg" alt="WashU Medicine" width="470" height="64" loading="lazy" decoding="async">
+          <img class="logo-cvr" src="assets/img/cvr-center.png" alt="Center for Cardiovascular Research" width="363" height="92" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -94,7 +263,7 @@ def page(active: str, title: str, description: str, body: str, extra_scripts: st
 
 HOME = r"""
     <section class="hero-bleed">
-      <img src="assets/img/cm-ctnt.jpg" alt="iPSC-cardiomyocytes stained for cardiac troponin T">
+      <img src="assets/img/cm-ctnt.jpg" alt="iPSC-cardiomyocytes stained for cardiac troponin T" fetchpriority="high">
       <div class="hero-copy">
         <p class="kicker">WashU Medicine · Cardiology</p>
         <h1>Decoding and treating human cardiovascular disease.</h1>
@@ -337,7 +506,7 @@ RESEARCH = r"""
     </section>
 """
 
-MODELS = r"""
+MODELS = rf"""
     <header class="masthead mast-models">
       <div class="wrap">
         <p class="kicker">Models</p>
@@ -351,11 +520,11 @@ MODELS = r"""
         <div class="section-head">
           <p class="kicker">Live</p>
           <h2>Beating cells and tissues</h2>
-          <p>Beating monolayers and engineered heart tissues recorded in culture.</p>
+          <p>Beating monolayers and engineered heart tissues recorded in culture. Press play on any clip.</p>
         </div>
-        <div class="clip-row clip-row-43">
+        <div class="clip-row">
           <figure class="specimen">
-            <div class="specimen-stage">
+            <div class="specimen-stage"{stage_ratio("assets/video/cm-beating.mp4")}>
               <video controls playsinline poster="assets/img/cm-beating-poster.jpg">
                 <source src="assets/video/cm-beating.mp4" type="video/mp4">
               </video>
@@ -366,7 +535,7 @@ MODELS = r"""
             </figcaption>
           </figure>
           <figure class="specimen">
-            <div class="specimen-stage">
+            <div class="specimen-stage"{stage_ratio("assets/video/eht-myl7.mp4")}>
               <video controls playsinline>
                 <source src="assets/video/eht-myl7.mp4" type="video/mp4">
               </video>
@@ -377,9 +546,9 @@ MODELS = r"""
             </figcaption>
           </figure>
         </div>
-        <div class="clip-row clip-row-portrait">
+        <div class="clip-row clip-row-tall">
           <figure class="specimen">
-            <div class="specimen-stage">
+            <div class="specimen-stage"{stage_ratio("assets/video/cm-myl7.mp4")}>
               <video controls playsinline>
                 <source src="assets/video/cm-myl7.mp4" type="video/mp4">
               </video>
@@ -390,7 +559,7 @@ MODELS = r"""
             </figcaption>
           </figure>
           <figure class="specimen">
-            <div class="specimen-stage">
+            <div class="specimen-stage"{stage_ratio("assets/video/eht-brightfield.mp4")}>
               <video controls playsinline>
                 <source src="assets/video/eht-brightfield.mp4" type="video/mp4">
               </video>
@@ -457,16 +626,16 @@ MODELS = r"""
               <span>MYH11</span>
             </figcaption>
           </figure>
-          <figure class="specimen">
-            <div class="specimen-stage">
-            <img src="assets/img/endothelial-protocol.jpg" alt="Endothelial differentiation figure">
-            </div>
-            <figcaption>
-              <strong>Endothelial protocol</strong>
-              <span>CD144, CD31, eNOS, vWF</span>
-            </figcaption>
-          </figure>
         </div>
+        <figure class="specimen specimen-wide">
+          <div class="specimen-stage"{stage_ratio("assets/img/endothelial-protocol.jpg")}>
+          <img src="assets/img/endothelial-protocol.jpg" alt="Xeno-free iPSC-endothelial differentiation: flow cytometry for CD144 and CD31, and immunostaining for eNOS and vWF">
+          </div>
+          <figcaption>
+            <strong>Endothelial cells</strong>
+            <span>High-efficiency xeno-free differentiation, characterised by CD144, CD31, eNOS, and vWF.</span>
+          </figcaption>
+        </figure>
       </div>
     </section>
 
@@ -477,9 +646,9 @@ MODELS = r"""
           <h2>Organoids</h2>
           <p>Cardiac organoids, vascularized cardiac organoids, and vessel organoids.</p>
         </div>
-        <div class="clip-row clip-row-43">
+        <div class="clip-row">
           <figure class="specimen">
-            <div class="specimen-stage">
+            <div class="specimen-stage"{stage_ratio("assets/video/cardiac-organoids.mp4")}>
               <video controls playsinline poster="assets/img/cardiac-organoid-poster.jpg">
                 <source src="assets/video/cardiac-organoids.mp4" type="video/mp4">
               </video>
@@ -490,7 +659,7 @@ MODELS = r"""
             </figcaption>
           </figure>
           <figure class="specimen">
-            <div class="specimen-stage">
+            <div class="specimen-stage"{stage_ratio("assets/video/vascularized-organoids.mp4")}>
               <video controls playsinline>
                 <source src="assets/video/vascularized-organoids.mp4" type="video/mp4">
               </video>
@@ -501,9 +670,9 @@ MODELS = r"""
             </figcaption>
           </figure>
         </div>
-        <div class="clip-row clip-row-43">
+        <div class="clip-row">
           <figure class="specimen">
-            <div class="specimen-stage">
+            <div class="specimen-stage"{stage_ratio("assets/img/vessel-organoid.jpg")}>
             <img src="assets/img/vessel-organoid.jpg" alt="iPSC vessel organoid stained for DAPI, VE-cadherin, CD31, PDGFRβ">
             </div>
             <figcaption>
@@ -512,7 +681,7 @@ MODELS = r"""
             </figcaption>
           </figure>
           <figure class="specimen">
-            <div class="specimen-stage">
+            <div class="specimen-stage"{stage_ratio("assets/video/vessel-organoids.mp4")}>
               <video controls playsinline>
                 <source src="assets/video/vessel-organoids.mp4" type="video/mp4">
               </video>
@@ -533,9 +702,9 @@ MODELS = r"""
           <h2>Lab spaces</h2>
           <p>Where the cultures are grown.</p>
         </div>
-        <div class="clip-row clip-row-169">
+        <div class="clip-row">
           <figure class="specimen">
-            <div class="specimen-stage">
+            <div class="specimen-stage"{stage_ratio("assets/video/lab-space.mp4")}>
               <video controls playsinline poster="assets/img/lab-space.jpg">
                 <source src="assets/video/lab-space.mp4" type="video/mp4">
               </video>
@@ -546,7 +715,7 @@ MODELS = r"""
             </figcaption>
           </figure>
           <figure class="specimen">
-            <div class="specimen-stage">
+            <div class="specimen-stage"{stage_ratio("assets/video/tissue-culture.mp4")}>
               <video controls playsinline poster="assets/img/tissue-culture.jpg">
                 <source src="assets/video/tissue-culture.mp4" type="video/mp4">
               </video>
@@ -688,16 +857,8 @@ PEOPLE = r"""
     <section>
       <div class="wrap">
         <h2>Lab members</h2>
-        <p class="lede">Named profiles will appear here as people join. Open seats below are placeholders for the roles we are recruiting.</p>
+        <p class="lede">Named profiles will appear here as people join. Every card below is a role we are actively recruiting.</p>
         <div class="team-grid">
-          <article class="person-card person-card-filled">
-            <img src="assets/img/headshot.jpg" alt="Portrait of Mengcheng Shen, PhD">
-            <div class="person-body">
-              <p class="person-role">Principal investigator</p>
-              <h3>Mengcheng Shen, PhD</h3>
-              <p>Assistant Professor of Medicine</p>
-            </div>
-          </article>
           <a class="person-card person-card-open" href="join.html">
             <div class="person-mark" aria-hidden="true">PD</div>
             <div class="person-body">
@@ -850,7 +1011,13 @@ def load_news() -> list:
     return sorted(items, key=lambda item: item["date"], reverse=True)
 
 
-def _news_card(item: dict) -> str:
+def _news_card(item: dict, level: int) -> str:
+    """Render one news item. `level` is the heading level for its title.
+
+    On news.html the items sit directly under the page h1, so they are h2. In
+    the home-page teaser they sit under the section's own h2, so they are h3.
+    Getting this wrong is what tripped the axe heading-order check.
+    """
     title = html.escape(item["title"])
     summary = html.escape(item["summary"])
     source = html.escape(item["source"])
@@ -864,7 +1031,7 @@ def _news_card(item: dict) -> str:
             <p class="news-kind">{kind}</p>
           </div>
           <div>
-            <h3><a href="{url}">{title}</a></h3>
+            <h{level} class="news-title"><a href="{url}">{title}</a></h{level}>
             <p>{summary}</p>
             <p class="news-source">{source}</p>
           </div>
@@ -873,7 +1040,7 @@ def _news_card(item: dict) -> str:
 
 def build_news_teaser() -> str:
     items = load_news()[:3]
-    cards = "".join(_news_card(item) for item in items)
+    cards = "".join(_news_card(item, 3) for item in items)
     return f"""
     <section>
       <div class="wrap">
@@ -891,7 +1058,7 @@ def build_news_teaser() -> str:
 
 def build_news() -> str:
     items = load_news()
-    cards = "".join(_news_card(item) for item in items)
+    cards = "".join(_news_card(item, 2) for item in items)
     return f"""
     <header class="masthead mast-news">
       <div class="wrap">
@@ -975,6 +1142,50 @@ def build_publications() -> str:
 
 
 
+NOT_FOUND = """
+    <header class="masthead mast-404">
+      <div class="wrap">
+        <p class="kicker">404</p>
+        <h1>That page is not on this site.</h1>
+        <p class="lede">The link may be out of date, or the page may have moved. Everything on the site is reachable from the menu above.</p>
+      </div>
+    </header>
+
+    <section>
+      <div class="wrap prose">
+        <h2>Try one of these</h2>
+        <ul class="refs">
+          <li><a href="index.html">Home</a> — what the lab works on, in brief.</li>
+          <li><a href="research.html">Research</a> — the five programs, with figures and papers.</li>
+          <li><a href="models.html">Models</a> — beating cells, organoids, and stained lineages.</li>
+          <li><a href="publications.html">Publications</a> — every paper, grouped by year.</li>
+          <li><a href="join.html">Join</a> — open positions and how to apply.</li>
+          <li><a href="contact.html">Contact</a> — email, address, and map.</li>
+        </ul>
+      </div>
+    </section>
+"""
+
+
+def build_sitemap(page_names: list[str]) -> str:
+    """Emit sitemap.xml. Harmless while the site is private; required at launch."""
+    urls = "\n".join(
+        f"  <url><loc>{SITE_URL}/{name}</loc></url>" for name in page_names
+    )
+    return (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f"{urls}\n"
+        "</urlset>\n"
+    )
+
+
+def build_robots() -> str:
+    if PUBLIC:
+        return f"User-agent: *\nAllow: /\n\nSitemap: {SITE_URL}/sitemap.xml\n"
+    return "User-agent: *\nDisallow: /\n"
+
+
 def main() -> None:
     pages = {
         "index.html": (
@@ -1038,6 +1249,20 @@ def main() -> None:
             encoding="utf-8",
         )
         print("wrote", name)
+
+    # 404 goes through the same shell so a stranded visitor still gets the nav.
+    # `active` is a page that is not in NAV, so nothing is marked current.
+    (ROOT / "404.html").write_text(
+        page("404.html", "Page not found · Shen Lab",
+             "That page is not on the Shen Lab site.", NOT_FOUND),
+        encoding="utf-8",
+    )
+    print("wrote 404.html")
+
+    (ROOT / "sitemap.xml").write_text(build_sitemap(list(pages)), encoding="utf-8")
+    print("wrote sitemap.xml")
+    (ROOT / "robots.txt").write_text(build_robots(), encoding="utf-8")
+    print(f"wrote robots.txt (PUBLIC={PUBLIC})")
 
 
 if __name__ == "__main__":
