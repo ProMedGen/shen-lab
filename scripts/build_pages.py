@@ -1024,7 +1024,6 @@ def build_featured() -> str:
             <img src="{html.escape(item["image"])}" alt="{html.escape(item["image_alt"])}">
           </figure>
           <div class="pub-feature-body">
-            <p class="pub-role">{html.escape(item["role"])}</p>
             <p class="journal">{html.escape(item["journal"])} · {item["year"]}</p>
             <h3>{html.escape(item["title"])}</h3>
             <p>{html.escape(item["blurb"])}</p>
