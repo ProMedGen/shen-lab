@@ -730,6 +730,7 @@ section {
 .figure-card {
   display: flex;
   flex-direction: column;
+  margin: 0;
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: 16px;
@@ -790,9 +791,10 @@ section {
   margin-bottom: 0;
 }
 
-/* Portrait clips: narrow the row so a 9:16 well does not become a tower. */
+/* Portrait clips: narrow the row so a 9:16 well does not become a tower, while
+   still leaving each card wide enough for its caption to sit on one line. */
 .clip-row-tall {
-  max-width: 32rem;
+  max-width: 45rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -800,6 +802,10 @@ section {
 .specimen {
   display: flex;
   flex-direction: column;
+  /* A <figure> carries a browser default of `margin: 1em 40px`. Left in, it
+     eats 80px from every card, which is what squeezed the portrait clips into
+     unreadable 166px columns. */
+  margin: 0;
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: 14px;
@@ -817,6 +823,14 @@ section {
   aspect-ratio: var(--stage-ratio, 4 / 3);
   background: var(--stage);
   overflow: hidden;
+}
+
+/* A tall clip at its true ratio would run to 900px+ in a full-width card.
+   Capping the well keeps rows an even height and centres a portrait clip on
+   the dark stage, which is how it looks down a microscope anyway. Landscape
+   clips sit below the cap and so still fill their well exactly. */
+.clip-row .specimen-stage {
+  max-height: 28rem;
 }
 
 /* The lineage gallery is deliberately a uniform grid of squares. These are
@@ -1558,8 +1572,10 @@ h2.year {
     grid-template-columns: 1fr;
   }
 
+  /* One column already keeps portrait clips in check, and the height cap does
+     the rest, so let this row match the width of every other card. */
   .clip-row-tall {
-    max-width: 18rem;
+    max-width: none;
   }
 
   .atlas-grid {

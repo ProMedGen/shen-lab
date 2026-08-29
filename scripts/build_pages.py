@@ -537,7 +537,7 @@ MODELS = rf"""
         <div class="section-head">
           <p class="kicker">Live</p>
           <h2>Beating cells and tissues</h2>
-          <p>Beating monolayers and engineered heart tissues recorded in culture. Press play on any clip.</p>
+          <p>Beating monolayers and engineered heart tissues recorded in culture. Clips loop silently; use the controls to pause or scrub.</p>
         </div>
         <div class="clip-row">
           <figure class="specimen">
