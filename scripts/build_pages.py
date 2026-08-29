@@ -236,7 +236,7 @@ def page(active: str, title: str, description: str, body: str, extra_scripts: st
         <img src="assets/img/logo.png" alt="Shen Lab logo" width="594" height="669" fetchpriority="high">
         <span class="brand-text">
           <strong>Shen Lab</strong>
-          <span>WashU Medicine</span>
+          <img class="brand-washu" src="assets/img/washu-medicine.svg" alt="WashU Medicine" width="470" height="64" loading="lazy" decoding="async">
         </span>
       </a>
       <p class="tagline">Human cells, CRISPR screens, new heart medicines</p>
