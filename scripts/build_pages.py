@@ -395,7 +395,7 @@ RESEARCH = r"""
       <div class="wrap">
         <p class="kicker">Five programs</p>
         <h1>Our research</h1>
-        <p class="lede">We combine unique access to human iPSC cardiovascular models with CRISPR screens, organoids, and computational perturbation maps.</p>
+        <p class="lede">Human iPSC cardiovascular models, CRISPR screens, organoids, and computational perturbation maps.</p>
       </div>
     </header>
 
@@ -524,7 +524,7 @@ MODELS = rf"""
         <div class="section-head">
           <p class="kicker">Live</p>
           <h2>Beating cells and tissues</h2>
-          <p>Beating monolayers and engineered heart tissues recorded in culture. Clips loop silently; use the controls to pause or scrub.</p>
+          <p>Beating monolayers and engineered heart tissues recorded in culture.</p>
         </div>
         <div class="clip-row">
           <figure class="specimen">
@@ -861,7 +861,7 @@ PEOPLE = r"""
     <section>
       <div class="wrap">
         <h2>Lab members</h2>
-        <p class="lede">Current members of the Cardiovascular Precision Medicine Lab. Open roles below remain actively recruiting.</p>
+        <p class="lede">Current members and open positions.</p>
         <div class="team-grid">
           <a class="person-card person-card-named" href="mailto:rshang@wustl.edu">
             <div class="person-mark" aria-hidden="true">SR</div>
@@ -912,7 +912,7 @@ PEOPLE = r"""
             </div>
           </a>
         </div>
-        <p class="team-note">If you want to fill one of these seats, see <a href="join.html">Join</a>.</p>
+        <p class="team-note"><a href="join.html">Join the lab</a></p>
       </div>
     </section>
 """
@@ -1065,9 +1065,9 @@ def build_featured() -> str:
     <section>
       <div class="wrap">
         <div class="section-head">
-          <p class="kicker">Lab foundation</p>
+          <p class="kicker">Publications</p>
           <h2>Featured publications</h2>
-          <p>Newest first; within a year, Science / Nature / Cell before other journals. <a href="publications.html">All publications</a>.</p>
+          <p><a href="publications.html">All publications</a></p>
         </div>
         <div class="featured-grid">{"".join(cards)}
         </div>
@@ -1142,7 +1142,7 @@ def build_news_teaser() -> str:
         <div class="section-head">
           <p class="kicker">News</p>
           <h2>Lab news and media coverage</h2>
-          <p>Institutional announcements, awards, and press on Dr. Shen's work. <a href="news.html">All news</a>.</p>
+          <p>Institutional announcements, awards, and press. <a href="news.html">All news</a>.</p>
         </div>
         <div class="news-list">{cards}
         </div>
@@ -1159,7 +1159,7 @@ def build_news() -> str:
       <div class="wrap">
         <p class="kicker">Updates</p>
         <h1>Lab news and media</h1>
-        <p class="lede">Documented awards, institutional announcements, and press coverage of Dr. Shen's work. Named team-member news will be added as people join.</p>
+        <p class="lede">Awards, announcements, and press coverage.</p>
       </div>
     </header>
 
@@ -1167,7 +1167,7 @@ def build_news() -> str:
       <div class="wrap">
         <div class="news-list">{cards}
         </div>
-        <p class="team-note">Send a link if we missed coverage of the lab or of a team member. Papers themselves stay on <a href="publications.html">Publications</a>.</p>
+        <p class="team-note">Papers are listed on <a href="publications.html">Publications</a>.</p>
       </div>
     </section>
 """
