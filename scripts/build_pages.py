@@ -280,7 +280,7 @@ def page(active: str, title: str, description: str, body: str, extra_scripts: st
 
 HOME = r"""
     <section class="hero-bleed">
-      <img src="assets/img/cm-ctnt.jpg" alt="iPSC-cardiomyocytes stained for cardiac troponin T" fetchpriority="high">
+      <img src="assets/img/banners/banner-home.jpg" alt="iPSC-cardiomyocytes stained for cardiac troponin T" fetchpriority="high">
       <div class="hero-copy">
         <p class="kicker">WashU Medicine · Cardiology</p>
         <h1>Decoding and treating human cardiovascular disease.</h1>

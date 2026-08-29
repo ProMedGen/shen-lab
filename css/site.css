@@ -1211,36 +1211,37 @@ nav.year-nav a:focus {
 }
 
 .mast-research {
-  background-image: url("../assets/img/cm-ctnt.jpg");
+  background-image: url("../assets/img/banners/banner-research.jpg");
 }
 
 .mast-models {
-  background-image: url("../assets/img/vessel-organoid.jpg");
+  background-image: url("../assets/img/banners/banner-models.jpg");
 }
 
 .mast-people {
-  background-image: url("../assets/img/lab-space.jpg");
+  /* Interim: upscaled lab photo until cartoon team banner lands. */
+  background-image: url("../assets/img/banners/banner-people-interim.jpg");
 }
 
 .mast-join {
-  background-image: url("../assets/img/tissue-culture.jpg");
+  background-image: url("../assets/img/banners/banner-join.jpg");
 }
 
 .mast-contact {
-  /* Dark fluorescence field — avoid annotated paper figures behind white type. */
-  background-image: url("../assets/img/smc-myh11.jpg");
+  background-image: url("../assets/img/banners/banner-contact.jpg");
 }
 
 .mast-pubs {
-  background-image: url("../assets/img/pericytes.jpg");
+  background-image: url("../assets/img/banners/banner-pubs.jpg");
 }
 
 .mast-news {
-  background-image: url("../assets/img/lab-space.jpg");
+  /* Interim unique placeholder until Firefly news illustration lands. */
+  background-image: url("../assets/img/banners/banner-pubs.jpg");
 }
 
 .mast-404 {
-  background-image: url("../assets/img/epicardial.jpg");
+  background-image: url("../assets/img/banners/banner-404.jpg");
 }
 
 .news-list {

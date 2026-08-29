@@ -6,3 +6,5 @@ __pycache__/
 .venv/
 scripts/screenshots/
 review/
+assets/img/banners/*-up.jpg
+assets/img/banners/*-up.png
