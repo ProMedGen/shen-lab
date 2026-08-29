@@ -1038,7 +1038,7 @@ def build_featured() -> str:
         <div class="section-head">
           <p class="kicker">Lab foundation</p>
           <h2>Featured publications</h2>
-          <p>Patented hiPSC cell platforms and lead CRISPR papers that define the lab. <a href="publications.html">All publications</a>.</p>
+          <p>Cell, Nature, and Science papers, plus the patented hiPSC platforms that define the lab. <a href="publications.html">All publications</a>.</p>
         </div>
         <div class="featured-grid">{"".join(cards)}
         </div>

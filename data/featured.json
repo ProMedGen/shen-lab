@@ -1,6 +1,45 @@
 [
   {
-    "role": "First author · patented platform",
+    "journal": "Science",
+    "year": 2025,
+    "title": "Gastruloids enable modeling of the earliest stages of human cardiac and hepatic vascularization",
+    "blurb": "Abilez OJ, Yang H, Guan Y, Shen M, et al. Human pluripotent stem cell gastruloids used to study how the heart and liver first become vascularized.",
+    "doi": "10.1126/science.adu9375",
+    "pmid": "40472086",
+    "image": "assets/img/vascularized-organoids-poster.jpg",
+    "image_alt": "Vascularized cardiac organoid from the Science paper"
+  },
+  {
+    "journal": "Cell",
+    "year": 2022,
+    "title": "Integrative single-cell analysis of cardiogenesis identifies developmental trajectories and non-coding mutations in congenital heart disease",
+    "blurb": "Ameen M, Sundaram L, Shen M, et al. Single-cell map of human cardiogenesis linking developmental trajectories to non-coding mutations in congenital heart disease.",
+    "doi": "10.1016/j.cell.2022.11.028",
+    "pmid": "36563664",
+    "image": "assets/img/cm-ctnt.jpg",
+    "image_alt": "iPSC-cardiomyocytes stained for cardiac troponin T"
+  },
+  {
+    "journal": "Cell Stem Cell",
+    "year": 2024,
+    "title": "CRISPRi/a screens in human iPSC-cardiomyocytes identify glycolytic activation as a druggable target for doxorubicin-induced cardiotoxicity",
+    "blurb": "Liu C, Shen M, et al. Bidirectional CRISPR screens in iPSC-cardiomyocytes — the cardio-oncology discovery engine the lab continues at WashU.",
+    "doi": "10.1016/j.stem.2024.10.007",
+    "pmid": "39515331",
+    "image": "assets/img/cardio-oncology.jpg",
+    "image_alt": "Cardio-oncology research illustration"
+  },
+  {
+    "journal": "Nat Cardiovasc Res",
+    "year": 2023,
+    "title": "Statins improve endothelial function via suppression of epigenetic-driven EndMT",
+    "blurb": "Liu C, Shen M, Tan WLW, et al. Foundational endothelial / EndMT work that underpins the lab's vessel and PAH CRISPR programs.",
+    "doi": "10.1038/s44161-023-00267-1",
+    "pmid": "37693816",
+    "image": "assets/img/epicardial.jpg",
+    "image_alt": "iPSC-epicardial cells stained for ZO-1 and WT1"
+  },
+  {
     "journal": "Circulation",
     "year": 2023,
     "title": "Stepwise Generation of Human Induced Pluripotent Stem Cell-Derived Cardiac Pericytes to Model Coronary Microvascular Dysfunction",
@@ -13,7 +52,6 @@
     "patent_url": "https://patentscope.wipo.int/search/en/detail.jsf?docId=WO2024123790"
   },
   {
-    "role": "First & corresponding · patent protocol",
     "journal": "STAR Protoc",
     "year": 2023,
     "title": "Protocol to generate cardiac pericytes from human induced pluripotent stem cells",
@@ -24,27 +62,5 @@
     "image_alt": "iPSC-derived cardiac pericytes for protocol",
     "patent": "WO2024123790",
     "patent_url": "https://techfinder.stanford.edu/technology/method-generate-cardiac-pericytes-human-induced-pluripotent-stem-cells"
-  },
-  {
-    "role": "Co-first author · screening platform",
-    "journal": "Cell Stem Cell",
-    "year": 2024,
-    "title": "CRISPRi/a screens in human iPSC-cardiomyocytes identify glycolytic activation as a druggable target for doxorubicin-induced cardiotoxicity",
-    "blurb": "Liu C, Shen M, et al. Bidirectional CRISPR screens in iPSC-cardiomyocytes — the cardio-oncology discovery engine the lab continues at WashU.",
-    "doi": "10.1016/j.stem.2024.10.007",
-    "pmid": "39515331",
-    "image": "assets/img/cardio-oncology.jpg",
-    "image_alt": "Cardio-oncology research illustration"
-  },
-  {
-    "role": "Co-first author · vessel biology",
-    "journal": "Nat Cardiovasc Res",
-    "year": 2023,
-    "title": "Statins improve endothelial function via suppression of epigenetic-driven EndMT",
-    "blurb": "Liu C, Shen M, Tan WLW, et al. Foundational endothelial / EndMT work that underpins the lab's vessel and PAH CRISPR programs.",
-    "doi": "10.1038/s44161-023-00267-1",
-    "pmid": "37693816",
-    "image": "assets/img/epicardial.jpg",
-    "image_alt": "iPSC-epicardial cells stained for ZO-1 and WT1"
   }
 ]
