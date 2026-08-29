@@ -1001,9 +1001,38 @@ CONTACT = r"""
     </section>
 """
 
+def _featured_journal_rank(journal: str) -> int:
+    """Lower rank sorts earlier within the same year (glam journals first)."""
+    j = journal.casefold().strip()
+    if j == "science" or j.startswith("science "):
+        return 0
+    if j == "nature" or j.startswith("nature ") or j.startswith("nat "):
+        return 1
+    if "cell stem cell" in j:
+        return 2
+    if j == "cell" or j.startswith("cell "):
+        return 3
+    if j.startswith("circulation"):
+        return 4
+    if j.startswith("circ res"):
+        return 5
+    if "star protoc" in j:
+        return 6
+    return 50
+
+
 def build_featured() -> str:
-    """Homepage cards for first / co-first / corresponding / patented foundation papers."""
+    """Homepage cards: newest year first, then journal prestige within a year."""
     items = json.loads((ROOT / "data" / "featured.json").read_text(encoding="utf-8"))
+    items = sorted(
+        items,
+        key=lambda p: (
+            -int(p["year"]),
+            _featured_journal_rank(p["journal"]),
+            p["journal"].casefold(),
+            p["title"].casefold(),
+        ),
+    )
     cards = []
     for item in items:
         doi = html.escape(item["doi"])
@@ -1038,7 +1067,7 @@ def build_featured() -> str:
         <div class="section-head">
           <p class="kicker">Lab foundation</p>
           <h2>Featured publications</h2>
-          <p>Cell, Nature, and Science papers, plus the patented hiPSC platforms that define the lab. <a href="publications.html">All publications</a>.</p>
+          <p>Newest first; within a year, Science / Nature / Cell before other journals. <a href="publications.html">All publications</a>.</p>
         </div>
         <div class="featured-grid">{"".join(cards)}
         </div>
