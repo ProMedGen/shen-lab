@@ -37,12 +37,15 @@ PAGES = [
 ]
 MISSION = "The Cardiovascular Precision Medicine Lab is led by Dr. Mengcheng Shen"
 
-# Transfer-size ceilings in KB, roughly 1.5x current size so ordinary content
-# edits pass but a re-added eager video or an unoptimised figure does not.
+# Transfer-size ceilings in KB, comfortably above current size so ordinary
+# content edits pass but a re-added eager video or an unoptimised figure does
+# not. These are measured after a full scroll, so the Models figure includes
+# every autoplaying specimen clip; it was 12.4 MB before the clips got
+# preload="none", posters, and loop-length encodes.
 WEIGHT_BUDGET_KB = {
     "index.html": 2000,
     "research.html": 2200,
-    "models.html": 3400,
+    "models.html": 4200,
     "publications.html": 1400,
     "news.html": 700,
     "people.html": 800,

@@ -1,3 +1,37 @@
+// Specimen clips marked data-loop play silently on a loop while they are on
+// screen. They keep preload="none", so nothing is fetched until a clip is
+// actually scrolled to -- a visitor who never reaches the Organoids section
+// never downloads it. Pausing off-screen clips keeps decode off the CPU.
+(() => {
+  const clips = document.querySelectorAll("video[data-loop]");
+  if (!clips.length) return;
+
+  // Honouring reduced-motion here rather than in CSS keeps the poster frame
+  // and the controls, so the clip is still available on demand.
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  if (typeof IntersectionObserver !== "function") return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        const video = entry.target;
+        if (entry.isIntersecting) {
+          // A play() rejection is expected when a browser or power-saving mode
+          // declines autoplay; the poster and controls remain, so there is
+          // nothing to recover from.
+          video.play().catch(() => {});
+        } else if (!video.paused) {
+          video.pause();
+        }
+      }
+    },
+    { rootMargin: "100px 0px", threshold: 0.25 },
+  );
+
+  clips.forEach((clip) => observer.observe(clip));
+})();
+
 (() => {
   const header = document.querySelector(".site-header");
   const button = document.querySelector(".menu-toggle");

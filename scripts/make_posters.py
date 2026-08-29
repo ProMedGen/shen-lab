@@ -9,6 +9,7 @@ materials in `Shen Lab WashU_lab_website_materials/`.
 
 from __future__ import annotations
 
+import argparse
 import subprocess
 from pathlib import Path
 
@@ -56,13 +57,21 @@ def extract(clip: Path, dest: Path, at: float) -> None:
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--force", action="store_true",
+        help="Re-extract posters that already exist. Needed after re-encoding a "
+             "clip, since a kept poster would still show the old footage.",
+    )
+    args = parser.parse_args()
+
     for clip_name, at in FRAME_AT.items():
         clip = VID / clip_name
         if not clip.exists():
             print(f"skip {clip_name} (missing)")
             continue
         dest = IMG / poster_name(clip_name)
-        if clip_name in EXISTING and dest.exists():
+        if dest.exists() and clip_name in EXISTING and not args.force:
             print(f"keep {dest.name:32s} {dest.stat().st_size / 1024:7.1f} KB")
             continue
         extract(clip, dest, at)

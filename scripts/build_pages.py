@@ -113,6 +113,15 @@ def _poster_for(video_rel: str) -> str | None:
     return rel if (ROOT / rel).exists() else None
 
 
+def _has_attr(attrs: str, name: str) -> bool:
+    """Whether an attribute is present as a whole token.
+
+    A plain substring test is wrong here: "loop" is inside "data-loop", so
+    checking for it that way silently skips adding the real loop attribute.
+    """
+    return re.search(rf"(?<![-\w]){re.escape(name)}(?![-\w])", attrs) is not None
+
+
 def enhance_media(markup: str) -> str:
     """Add intrinsic sizing, loading hints, and video posters to a page body."""
 
@@ -141,9 +150,17 @@ def enhance_media(markup: str) -> str:
         attrs, source_rel = match.group(1), match.group(2)
         additions = []
         # preload="none" keeps the Models page from downloading every clip up
-        # front; the poster stands in until a visitor presses play.
+        # front; the poster stands in until a visitor presses play, or until
+        # js/site.js starts a data-loop clip that has scrolled into view.
         if "preload=" not in attrs:
             additions.append('preload="none"')
+        # Autoplaying a specimen clip requires muted+loop. `controls` stays so a
+        # visitor can stop the motion, which WCAG 2.2.2 requires for anything
+        # animating longer than five seconds.
+        if _has_attr(attrs, "data-loop"):
+            for flag in ("muted", "loop"):
+                if not _has_attr(attrs, flag):
+                    additions.append(flag)
         if "poster=" not in attrs:
             poster = _poster_for(source_rel)
             if poster:
@@ -525,7 +542,7 @@ MODELS = rf"""
         <div class="clip-row">
           <figure class="specimen">
             <div class="specimen-stage"{stage_ratio("assets/video/cm-beating.mp4")}>
-              <video controls playsinline poster="assets/img/cm-beating-poster.jpg">
+              <video controls playsinline poster="assets/img/cm-beating-poster.jpg" data-loop>
                 <source src="assets/video/cm-beating.mp4" type="video/mp4">
               </video>
             </div>
@@ -536,7 +553,7 @@ MODELS = rf"""
           </figure>
           <figure class="specimen">
             <div class="specimen-stage"{stage_ratio("assets/video/eht-myl7.mp4")}>
-              <video controls playsinline>
+              <video controls playsinline data-loop>
                 <source src="assets/video/eht-myl7.mp4" type="video/mp4">
               </video>
             </div>
@@ -549,7 +566,7 @@ MODELS = rf"""
         <div class="clip-row clip-row-tall">
           <figure class="specimen">
             <div class="specimen-stage"{stage_ratio("assets/video/cm-myl7.mp4")}>
-              <video controls playsinline>
+              <video controls playsinline data-loop>
                 <source src="assets/video/cm-myl7.mp4" type="video/mp4">
               </video>
             </div>
@@ -560,7 +577,7 @@ MODELS = rf"""
           </figure>
           <figure class="specimen">
             <div class="specimen-stage"{stage_ratio("assets/video/eht-brightfield.mp4")}>
-              <video controls playsinline>
+              <video controls playsinline data-loop>
                 <source src="assets/video/eht-brightfield.mp4" type="video/mp4">
               </video>
             </div>
@@ -649,7 +666,7 @@ MODELS = rf"""
         <div class="clip-row">
           <figure class="specimen">
             <div class="specimen-stage"{stage_ratio("assets/video/cardiac-organoids.mp4")}>
-              <video controls playsinline poster="assets/img/cardiac-organoid-poster.jpg">
+              <video controls playsinline poster="assets/img/cardiac-organoid-poster.jpg" data-loop>
                 <source src="assets/video/cardiac-organoids.mp4" type="video/mp4">
               </video>
             </div>
@@ -660,7 +677,7 @@ MODELS = rf"""
           </figure>
           <figure class="specimen">
             <div class="specimen-stage"{stage_ratio("assets/video/vascularized-organoids.mp4")}>
-              <video controls playsinline>
+              <video controls playsinline data-loop>
                 <source src="assets/video/vascularized-organoids.mp4" type="video/mp4">
               </video>
             </div>
@@ -682,7 +699,7 @@ MODELS = rf"""
           </figure>
           <figure class="specimen">
             <div class="specimen-stage"{stage_ratio("assets/video/vessel-organoids.mp4")}>
-              <video controls playsinline>
+              <video controls playsinline data-loop>
                 <source src="assets/video/vessel-organoids.mp4" type="video/mp4">
               </video>
             </div>

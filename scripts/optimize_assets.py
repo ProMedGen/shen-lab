@@ -89,7 +89,13 @@ def ffmpeg(cmd: list[str]) -> None:
     subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE)
 
 
-def encode_video(src_name: str, dest_name: str, start: float | None = None, duration: float | None = None) -> None:
+def encode_video(
+    src_name: str,
+    dest_name: str,
+    start: float | None = None,
+    duration: float | None = None,
+    max_w: int = 1280,
+) -> None:
     dest = VID / dest_name
     cmd = ["ffmpeg", "-y"]
     if start is not None:
@@ -98,7 +104,7 @@ def encode_video(src_name: str, dest_name: str, start: float | None = None, dura
     if duration is not None:
         cmd += ["-t", str(duration)]
     cmd += [
-        "-vf", "scale='min(1280,iw)':-2",
+        "-vf", f"scale='min({max_w},iw)':-2",
         "-c:v", "libx264",
         "-pix_fmt", "yuv420p",
         "-crf", "28",
@@ -146,12 +152,17 @@ def main() -> None:
     convert_image("iPSC-cardiac smooth muscle cells, MYH11_red.jpg", "smc-myh11.jpg", max_w=1400)
     convert_image("iPSC-vessel organoids.png", "vessel-organoid.jpg", max_w=1400)
 
-    encode_video("iPSC-cardiomyocytes, beating1.mov", "cm-beating.mp4")
+    # The specimen clips on the Models page autoplay on a loop, so they are cut
+    # to a few representative seconds and capped at 960px. Left at full length
+    # (17s and 30s) these two alone were 7.5 MB of the page.
+    encode_video("iPSC-cardiomyocytes, beating1.mov", "cm-beating.mp4",
+                 start=2.0, duration=6.0, max_w=960)
     encode_video("iPSC-cardiomyocytes, beating_MYL7 in green.mov", "cm-myl7.mp4")
     encode_video("iPSC-engineered heart tissues_brightfield.mp4", "eht-brightfield.mp4")
     encode_video("iPSC-engineered heart tissues_MYL7_eGFP.mp4", "eht-myl7.mp4")
     encode_video("iPSC-cardiac orgaoids.mov", "cardiac-organoids.mp4")
-    encode_video("iPSC-vascularized cardiac organoids.mp4", "vascularized-organoids.mp4")
+    encode_video("iPSC-vascularized cardiac organoids.mp4", "vascularized-organoids.mp4",
+                 start=6.0, duration=7.0, max_w=960)
     encode_video(
         "iPSC-vessel organoids,CD31 (endothelial cells, magenta), PDGFR-β (mural cells, yellow) and Collagen IV (basement membrane, cyan).mp4",
         "vessel-organoids.mp4",
