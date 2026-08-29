@@ -1167,7 +1167,6 @@ def build_news() -> str:
       <div class="wrap">
         <div class="news-list">{cards}
         </div>
-        <p class="team-note">Papers are listed on <a href="publications.html">Publications</a>.</p>
       </div>
     </section>
 """
@@ -1242,20 +1241,20 @@ NOT_FOUND = """
       <div class="wrap">
         <p class="kicker">404</p>
         <h1>That page is not on this site.</h1>
-        <p class="lede">The link may be out of date, or the page may have moved. Everything on the site is reachable from the menu above.</p>
+        <p class="lede">The link may be out of date, or the page may have moved.</p>
       </div>
     </header>
 
     <section>
       <div class="wrap prose">
-        <h2>Try one of these</h2>
+        <h2>Continue here</h2>
         <ul class="refs">
-          <li><a href="index.html">Home</a> — what the lab works on, in brief.</li>
-          <li><a href="research.html">Research</a> — the five programs, with figures and papers.</li>
-          <li><a href="models.html">Models</a> — beating cells, organoids, and stained lineages.</li>
-          <li><a href="publications.html">Publications</a> — every paper, grouped by year.</li>
-          <li><a href="join.html">Join</a> — open positions and how to apply.</li>
-          <li><a href="contact.html">Contact</a> — email, address, and map.</li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="models.html">Models</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="join.html">Join</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
     </section>
