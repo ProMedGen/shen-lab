@@ -381,16 +381,20 @@ HOME = r"""
         </div>
         <div class="mosaic">
           <a class="tile" href="models.html">
-            <img src="assets/img/cm-beating-poster.jpg" alt="Beating iPSC-cardiomyocytes in brightfield">
-            <span>Beating CM · brightfield</span>
+            <img src="assets/img/cm-ctnt.jpg" alt="iPSC-cardiomyocytes, cardiac troponin T">
+            <span>CM · cTnT</span>
           </a>
           <a class="tile" href="models.html">
-            <img src="assets/img/cm-myl7-poster.jpg" alt="MYL7 reporter cardiomyocytes">
-            <span>MYL7 reporter</span>
+            <img src="assets/img/epicardial.jpg" alt="iPSC-epicardial cells">
+            <span>Epicardial · ZO-1 / WT1</span>
           </a>
           <a class="tile" href="models.html">
-            <img src="assets/img/eht-myl7-poster.jpg" alt="Engineered heart tissue, MYL7-eGFP">
-            <span>EHT · MYL7</span>
+            <img src="assets/img/vessel-organoid.jpg" alt="iPSC vessel organoid">
+            <span>Vessel organoid</span>
+          </a>
+          <a class="tile" href="models.html">
+            <img src="assets/img/pericytes.jpg" alt="iPSC-cardiac pericytes">
+            <span>Pericytes · αSMA / PDGFRβ</span>
           </a>
           <a class="tile" href="models.html">
             <img src="assets/img/fibroblasts.jpg" alt="iPSC-cardiac fibroblasts">
@@ -399,10 +403,6 @@ HOME = r"""
           <a class="tile" href="models.html">
             <img src="assets/img/smc-myh11.jpg" alt="iPSC-cardiac smooth muscle cells">
             <span>SMC · MYH11</span>
-          </a>
-          <a class="tile" href="models.html">
-            <img src="assets/img/cardiac-organoid-poster.jpg" alt="Vascularized cardiac organoid">
-            <span>Cardiac organoid</span>
           </a>
         </div>
       </div>
