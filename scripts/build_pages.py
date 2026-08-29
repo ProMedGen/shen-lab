@@ -351,26 +351,7 @@ HOME = r"""
 
     <!--NEWS_TEASER-->
 
-    <section>
-      <div class="wrap">
-        <p class="kicker">Featured publication</p>
-        <article class="pub pub-feature">
-          <figure class="pub-feature-media">
-            <img src="assets/img/vascularized-organoids-poster.jpg" alt="Vascularized cardiac organoid from the featured Science paper">
-          </figure>
-          <div class="pub-feature-body">
-            <p class="journal">Science · 2025</p>
-            <h3>Gastruloids enable modeling of the earliest stages of human cardiac and hepatic vascularization</h3>
-            <p>Abilez OJ, Yang H, Guan Y, Shen M, et al. Human pluripotent stem cell gastruloids used to study how the heart and liver first become vascularized.</p>
-            <div class="chips">
-              <a class="chip" href="https://doi.org/10.1126/science.adu9375">DOI</a>
-              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/40472086/">PMID</a>
-              <a class="chip" href="publications.html">All publications</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
+    <!--FEATURED_PUBS-->
 
     <section>
       <div class="wrap">
@@ -1020,6 +1001,46 @@ CONTACT = r"""
     </section>
 """
 
+def build_featured() -> str:
+    """Homepage cards for first / co-first / corresponding papers."""
+    items = json.loads((ROOT / "data" / "featured.json").read_text(encoding="utf-8"))
+    cards = []
+    for item in items:
+        doi = html.escape(item["doi"])
+        pmid = html.escape(item["pmid"])
+        cards.append(
+            f"""
+        <article class="pub pub-feature">
+          <figure class="pub-feature-media">
+            <img src="{html.escape(item["image"])}" alt="{html.escape(item["image_alt"])}">
+          </figure>
+          <div class="pub-feature-body">
+            <p class="pub-role">{html.escape(item["role"])}</p>
+            <p class="journal">{html.escape(item["journal"])} · {item["year"]}</p>
+            <h3>{html.escape(item["title"])}</h3>
+            <p>{html.escape(item["blurb"])}</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/{doi}">DOI</a>
+              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/{pmid}/">PMID</a>
+            </div>
+          </div>
+        </article>"""
+        )
+    return f"""
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <p class="kicker">Selected papers</p>
+          <h2>Featured publications</h2>
+          <p>First-author, co-first, and corresponding papers from Dr. Shen. <a href="publications.html">All publications</a>.</p>
+        </div>
+        <div class="featured-grid">{"".join(cards)}
+        </div>
+      </div>
+    </section>
+"""
+
+
 def _authors_html(names: list[str]) -> str:
     bits = []
     for name in names:
@@ -1231,7 +1252,9 @@ def main() -> None:
             "index.html",
             "Shen Lab · Cardiovascular Precision Medicine",
             "Cardiovascular Precision Medicine Lab at WashU Medicine, led by Mengcheng Shen, PhD.",
-            HOME.replace("    <!--NEWS_TEASER-->\n", build_news_teaser()),
+            HOME.replace("    <!--NEWS_TEASER-->\n", build_news_teaser()).replace(
+                "    <!--FEATURED_PUBS-->\n", build_featured()
+            ),
         ),
         "research.html": (
             "research.html",

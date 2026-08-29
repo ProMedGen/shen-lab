@@ -1,0 +1,46 @@
+[
+  {
+    "role": "Co-first author",
+    "journal": "Cell Stem Cell",
+    "year": 2024,
+    "title": "CRISPRi/a screens in human iPSC-cardiomyocytes identify glycolytic activation as a druggable target for doxorubicin-induced cardiotoxicity",
+    "blurb": "Liu C, Shen M, et al. Bidirectional CRISPR screens in iPSC-cardiomyocytes nominate CA12 and glycolysis as targets to blunt doxorubicin cardiotoxicity without losing anti-cancer effect.",
+    "doi": "10.1016/j.stem.2024.10.007",
+    "pmid": "39515331",
+    "image": "assets/img/cardio-oncology.jpg",
+    "image_alt": "Cardio-oncology research illustration"
+  },
+  {
+    "role": "Co-first author",
+    "journal": "Nat Cardiovasc Res",
+    "year": 2023,
+    "title": "Statins improve endothelial function via suppression of epigenetic-driven EndMT",
+    "blurb": "Liu C, Shen M, Tan WLW, et al. Simvastatin represses endothelial-to-mesenchymal transition through epigenetic control of YAP signaling.",
+    "doi": "10.1038/s44161-023-00267-1",
+    "pmid": "37693816",
+    "image": "assets/img/epicardial.jpg",
+    "image_alt": "iPSC-epicardial cells stained for ZO-1 and WT1"
+  },
+  {
+    "role": "First author",
+    "journal": "Circulation",
+    "year": 2023,
+    "title": "Stepwise Generation of Human Induced Pluripotent Stem Cell-Derived Cardiac Pericytes to Model Coronary Microvascular Dysfunction",
+    "blurb": "Shen M, Liu C, et al. A stepwise protocol to derive cardiac pericytes from hiPSCs and model coronary microvascular dysfunction.",
+    "doi": "10.1161/CIRCULATIONAHA.122.061770",
+    "pmid": "36745700",
+    "image": "assets/img/pericytes.jpg",
+    "image_alt": "iPSC-derived cardiac pericytes"
+  },
+  {
+    "role": "First author",
+    "journal": "Circ Res",
+    "year": 2018,
+    "title": "Cell-Specific Functions of ADAM17 Regulate the Progression of Thoracic Aortic Aneurysm",
+    "blurb": "Shen M, et al. Smooth-muscle ADAM17 drives thoracic aortic aneurysm progression — a defining paper from Dr. Shen's doctoral work.",
+    "doi": "10.1161/CIRCRESAHA.118.313181",
+    "pmid": "29930147",
+    "image": "assets/img/smc-myh11.jpg",
+    "image_alt": "iPSC-derived smooth muscle cells stained for MYH11"
+  }
+]
