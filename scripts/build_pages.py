@@ -22,8 +22,8 @@ ROOT = Path(__file__).resolve().parent.parent
 PUBLIC = False
 
 # Absolute base for canonical and social-preview URLs, no trailing slash.
-# Replace with the public hostname (or custom domain) when PUBLIC becomes True.
-SITE_URL = "https://super-adventure-gwynznl.pages.github.io"
+# Project site on the public org hostname (random private subdomain retired).
+SITE_URL = "https://promedgen.github.io/shen-lab"
 
 SITE_NAME = "Shen Lab"
 SOCIAL_IMAGE = "assets/img/cm-ctnt.jpg"
