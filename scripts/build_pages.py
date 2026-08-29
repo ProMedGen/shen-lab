@@ -1002,12 +1002,21 @@ CONTACT = r"""
 """
 
 def build_featured() -> str:
-    """Homepage cards for first / co-first / corresponding papers."""
+    """Homepage cards for first / co-first / corresponding / patented foundation papers."""
     items = json.loads((ROOT / "data" / "featured.json").read_text(encoding="utf-8"))
     cards = []
     for item in items:
         doi = html.escape(item["doi"])
         pmid = html.escape(item["pmid"])
+        chips = [
+            f'<a class="chip" href="https://doi.org/{doi}">DOI</a>',
+            f'<a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/{pmid}/">PMID</a>',
+        ]
+        if item.get("patent") and item.get("patent_url"):
+            chips.insert(
+                0,
+                f'<a class="chip" href="{html.escape(item["patent_url"])}">{html.escape(item["patent"])}</a>',
+            )
         cards.append(
             f"""
         <article class="pub pub-feature">
@@ -1019,9 +1028,7 @@ def build_featured() -> str:
             <p class="journal">{html.escape(item["journal"])} · {item["year"]}</p>
             <h3>{html.escape(item["title"])}</h3>
             <p>{html.escape(item["blurb"])}</p>
-            <div class="chips">
-              <a class="chip" href="https://doi.org/{doi}">DOI</a>
-              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/{pmid}/">PMID</a>
+            <div class="chips">{"".join(chips)}
             </div>
           </div>
         </article>"""
@@ -1030,9 +1037,9 @@ def build_featured() -> str:
     <section>
       <div class="wrap">
         <div class="section-head">
-          <p class="kicker">Selected papers</p>
+          <p class="kicker">Lab foundation</p>
           <h2>Featured publications</h2>
-          <p>First-author, co-first, and corresponding papers from Dr. Shen. <a href="publications.html">All publications</a>.</p>
+          <p>Patented hiPSC cell platforms and lead CRISPR papers that define the lab. <a href="publications.html">All publications</a>.</p>
         </div>
         <div class="featured-grid">{"".join(cards)}
         </div>

@@ -1,46 +1,50 @@
 [
   {
-    "role": "Co-first author",
+    "role": "First author · patented platform",
+    "journal": "Circulation",
+    "year": 2023,
+    "title": "Stepwise Generation of Human Induced Pluripotent Stem Cell-Derived Cardiac Pericytes to Model Coronary Microvascular Dysfunction",
+    "blurb": "Shen M, Liu C, et al. First-of-its-kind hiPSC cardiac pericytes that match primary cells — the lab's patented model for coronary microvascular disease and cardio-oncology toxicity screens.",
+    "doi": "10.1161/CIRCULATIONAHA.122.061770",
+    "pmid": "36745700",
+    "image": "assets/img/pericytes.jpg",
+    "image_alt": "iPSC-derived cardiac pericytes",
+    "patent": "WO2024123790",
+    "patent_url": "https://patentscope.wipo.int/search/en/detail.jsf?docId=WO2024123790"
+  },
+  {
+    "role": "First & corresponding · patent protocol",
+    "journal": "STAR Protoc",
+    "year": 2023,
+    "title": "Protocol to generate cardiac pericytes from human induced pluripotent stem cells",
+    "blurb": "Shen M, et al. Step-by-step method that implements the patented iPSC–cardiac pericyte differentiation (Stanford TechFinder S22-436 / WO2024123790).",
+    "doi": "10.1016/j.xpro.2023.102256",
+    "pmid": "37119139",
+    "image": "assets/img/pericytes.jpg",
+    "image_alt": "iPSC-derived cardiac pericytes for protocol",
+    "patent": "WO2024123790",
+    "patent_url": "https://techfinder.stanford.edu/technology/method-generate-cardiac-pericytes-human-induced-pluripotent-stem-cells"
+  },
+  {
+    "role": "Co-first author · screening platform",
     "journal": "Cell Stem Cell",
     "year": 2024,
     "title": "CRISPRi/a screens in human iPSC-cardiomyocytes identify glycolytic activation as a druggable target for doxorubicin-induced cardiotoxicity",
-    "blurb": "Liu C, Shen M, et al. Bidirectional CRISPR screens in iPSC-cardiomyocytes nominate CA12 and glycolysis as targets to blunt doxorubicin cardiotoxicity without losing anti-cancer effect.",
+    "blurb": "Liu C, Shen M, et al. Bidirectional CRISPR screens in iPSC-cardiomyocytes — the cardio-oncology discovery engine the lab continues at WashU.",
     "doi": "10.1016/j.stem.2024.10.007",
     "pmid": "39515331",
     "image": "assets/img/cardio-oncology.jpg",
     "image_alt": "Cardio-oncology research illustration"
   },
   {
-    "role": "Co-first author",
+    "role": "Co-first author · vessel biology",
     "journal": "Nat Cardiovasc Res",
     "year": 2023,
     "title": "Statins improve endothelial function via suppression of epigenetic-driven EndMT",
-    "blurb": "Liu C, Shen M, Tan WLW, et al. Simvastatin represses endothelial-to-mesenchymal transition through epigenetic control of YAP signaling.",
+    "blurb": "Liu C, Shen M, Tan WLW, et al. Foundational endothelial / EndMT work that underpins the lab's vessel and PAH CRISPR programs.",
     "doi": "10.1038/s44161-023-00267-1",
     "pmid": "37693816",
     "image": "assets/img/epicardial.jpg",
     "image_alt": "iPSC-epicardial cells stained for ZO-1 and WT1"
-  },
-  {
-    "role": "First author",
-    "journal": "Circulation",
-    "year": 2023,
-    "title": "Stepwise Generation of Human Induced Pluripotent Stem Cell-Derived Cardiac Pericytes to Model Coronary Microvascular Dysfunction",
-    "blurb": "Shen M, Liu C, et al. A stepwise protocol to derive cardiac pericytes from hiPSCs and model coronary microvascular dysfunction.",
-    "doi": "10.1161/CIRCULATIONAHA.122.061770",
-    "pmid": "36745700",
-    "image": "assets/img/pericytes.jpg",
-    "image_alt": "iPSC-derived cardiac pericytes"
-  },
-  {
-    "role": "First author",
-    "journal": "Circ Res",
-    "year": 2018,
-    "title": "Cell-Specific Functions of ADAM17 Regulate the Progression of Thoracic Aortic Aneurysm",
-    "blurb": "Shen M, et al. Smooth-muscle ADAM17 drives thoracic aortic aneurysm progression — a defining paper from Dr. Shen's doctoral work.",
-    "doi": "10.1161/CIRCRESAHA.118.313181",
-    "pmid": "29930147",
-    "image": "assets/img/smc-myh11.jpg",
-    "image_alt": "iPSC-derived smooth muscle cells stained for MYH11"
   }
 ]
