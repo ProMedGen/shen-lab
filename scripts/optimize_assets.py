@@ -95,7 +95,13 @@ def encode_video(
     start: float | None = None,
     duration: float | None = None,
     max_w: int = 1280,
+    crop: str | None = None,
 ) -> None:
+    """Re-encode a source clip for the web.
+
+    `crop` is an ffmpeg crop expression, "w:h:x:y". It runs before the scale so
+    max_w applies to the cropped frame.
+    """
     dest = VID / dest_name
     cmd = ["ffmpeg", "-y"]
     if start is not None:
@@ -103,8 +109,9 @@ def encode_video(
     cmd += ["-i", str(SRC / src_name)]
     if duration is not None:
         cmd += ["-t", str(duration)]
+    scale = f"scale='min({max_w},iw)':-2"
     cmd += [
-        "-vf", f"scale='min({max_w},iw)':-2",
+        "-vf", f"crop={crop},{scale}" if crop else scale,
         "-c:v", "libx264",
         "-pix_fmt", "yuv420p",
         "-crf", "28",
@@ -157,7 +164,12 @@ def main() -> None:
     # (17s and 30s) these two alone were 7.5 MB of the page.
     encode_video("iPSC-cardiomyocytes, beating1.mov", "cm-beating.mp4",
                  start=2.0, duration=6.0, max_w=960)
-    encode_video("iPSC-cardiomyocytes, beating_MYL7 in green.mov", "cm-myl7.mp4")
+    # Filmed off a monitor, so the raw frame includes the imaging-software
+    # toolbar, the Windows taskbar, the monitor bezel and the desk below it.
+    # Crop to the fluorescence field only; this also takes the clip from 0.56 to
+    # 0.77 aspect, which cuts the dark mat beside it on the Models page.
+    encode_video("iPSC-cardiomyocytes, beating_MYL7 in green.mov", "cm-myl7.mp4",
+                 crop="696:900:12:112")
     encode_video("iPSC-engineered heart tissues_brightfield.mp4", "eht-brightfield.mp4")
     encode_video("iPSC-engineered heart tissues_MYL7_eGFP.mp4", "eht-myl7.mp4")
     encode_video("iPSC-cardiac orgaoids.mov", "cardiac-organoids.mp4")
