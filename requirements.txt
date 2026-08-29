@@ -1,0 +1,13 @@
+# Build and verification tooling for the Shen Lab site.
+# The published site is plain HTML/CSS/JS and needs none of this at runtime.
+#
+#   python3 -m venv .venv
+#   .venv/bin/pip install -r requirements.txt
+#   .venv/bin/playwright install chromium   # only for scripts/verify_site.py
+
+# scripts/optimize_assets.py, scripts/make_posters.py
+pillow>=11.0
+numpy>=2.1
+
+# scripts/verify_site.py
+playwright>=1.48
