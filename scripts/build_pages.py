@@ -296,7 +296,8 @@ HOME = r"""
       <div class="wrap">
         <div class="mission">
           <h2>Research</h2>
-          <p>The Cardiovascular Precision Medicine Lab is led by Dr. Mengcheng Shen, PhD, with a goal to understand the genetic and cellular mechanisms that regulate the development and function of the human cardiovascular system in health and disease. Using human induced pluripotent stem cells and emerging functional-genomic, genome-editing, and organoid technologies, we are focused on decoding the gene programs that drive congenital and acquired cardiovascular disease, the leading cause of death worldwide.</p>
+          <p class="mission-lead">We decode the gene programs that drive congenital and acquired cardiovascular disease — the leading cause of death worldwide.</p>
+          <p>The Cardiovascular Precision Medicine Lab is led by Dr. Mengcheng Shen, PhD, with a goal to understand the genetic and cellular mechanisms that regulate the development and function of the human cardiovascular system in health and disease. Using human induced pluripotent stem cells and emerging functional-genomic, genome-editing, and organoid technologies, we are focused on decoding those programs in human cells.</p>
           <p>To translate these findings back to the clinic, the lab also develops new approaches, including novel iPSC-cardiovascular models, high-throughput CRISPR screens, and single-cell Perturb-seq coupled with virtual-cell computational models, to nominate disease drivers and deliver next-generation, precision-based therapeutics, from small molecules that prevent anti-cancer drug–induced cardiotoxicity to chemically defined cells for regenerative medicine. By building these human-relevant models entirely from human cells, in step with the NIH New Approach Methodologies (NAMs) initiative, we ultimately seek to advance the diagnosis and treatment of cardiomyopathy, congenital heart disease, and related cardiovascular disorders.</p>
         </div>
       </div>
@@ -353,14 +354,19 @@ HOME = r"""
     <section>
       <div class="wrap">
         <p class="kicker">Featured publication</p>
-        <article class="pub">
-          <p class="journal">Science · 2025</p>
-          <h3>Gastruloids enable modeling of the earliest stages of human cardiac and hepatic vascularization</h3>
-          <p>Abilez OJ, Yang H, Guan Y, Shen M, et al. Human pluripotent stem cell gastruloids used to study how the heart and liver first become vascularized.</p>
-          <div class="chips">
-            <a class="chip" href="https://doi.org/10.1126/science.adu9375">DOI</a>
-            <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/40472086/">PMID</a>
-            <a class="chip" href="publications.html">All publications</a>
+        <article class="pub pub-feature">
+          <figure class="pub-feature-media">
+            <img src="assets/img/vascularized-organoids-poster.jpg" alt="Vascularized cardiac organoid from the featured Science paper">
+          </figure>
+          <div class="pub-feature-body">
+            <p class="journal">Science · 2025</p>
+            <h3>Gastruloids enable modeling of the earliest stages of human cardiac and hepatic vascularization</h3>
+            <p>Abilez OJ, Yang H, Guan Y, Shen M, et al. Human pluripotent stem cell gastruloids used to study how the heart and liver first become vascularized.</p>
+            <div class="chips">
+              <a class="chip" href="https://doi.org/10.1126/science.adu9375">DOI</a>
+              <a class="chip" href="https://pubmed.ncbi.nlm.nih.gov/40472086/">PMID</a>
+              <a class="chip" href="publications.html">All publications</a>
+            </div>
           </div>
         </article>
       </div>
@@ -375,20 +381,16 @@ HOME = r"""
         </div>
         <div class="mosaic">
           <a class="tile" href="models.html">
-            <img src="assets/img/cm-ctnt.jpg" alt="iPSC-cardiomyocytes, cardiac troponin T">
-            <span>CM · cTnT</span>
+            <img src="assets/img/cm-beating-poster.jpg" alt="Beating iPSC-cardiomyocytes in brightfield">
+            <span>Beating CM · brightfield</span>
           </a>
           <a class="tile" href="models.html">
-            <img src="assets/img/epicardial.jpg" alt="iPSC-epicardial cells">
-            <span>Epicardial · ZO-1 / WT1</span>
+            <img src="assets/img/cm-myl7-poster.jpg" alt="MYL7 reporter cardiomyocytes">
+            <span>MYL7 reporter</span>
           </a>
           <a class="tile" href="models.html">
-            <img src="assets/img/vessel-organoid.jpg" alt="iPSC vessel organoid">
-            <span>Vessel organoid</span>
-          </a>
-          <a class="tile" href="models.html">
-            <img src="assets/img/pericytes.jpg" alt="iPSC-cardiac pericytes">
-            <span>Pericytes · αSMA / PDGFRβ</span>
+            <img src="assets/img/eht-myl7-poster.jpg" alt="Engineered heart tissue, MYL7-eGFP">
+            <span>EHT · MYL7</span>
           </a>
           <a class="tile" href="models.html">
             <img src="assets/img/fibroblasts.jpg" alt="iPSC-cardiac fibroblasts">
@@ -398,6 +400,10 @@ HOME = r"""
             <img src="assets/img/smc-myh11.jpg" alt="iPSC-cardiac smooth muscle cells">
             <span>SMC · MYH11</span>
           </a>
+          <a class="tile" href="models.html">
+            <img src="assets/img/cardiac-organoid-poster.jpg" alt="Vascularized cardiac organoid">
+            <span>Cardiac organoid</span>
+          </a>
         </div>
       </div>
     </section>
@@ -406,7 +412,7 @@ HOME = r"""
 RESEARCH = r"""
     <header class="masthead mast-research">
       <div class="wrap">
-        <p class="kicker">Research</p>
+        <p class="kicker">Five programs</p>
         <h1>Our research</h1>
         <p class="lede">We combine unique access to human iPSC cardiovascular models with CRISPR screens, organoids, and computational perturbation maps.</p>
       </div>
@@ -526,7 +532,7 @@ RESEARCH = r"""
 MODELS = rf"""
     <header class="masthead mast-models">
       <div class="wrap">
-        <p class="kicker">Models</p>
+        <p class="kicker">Cell atlas</p>
         <h1>A cardiovascular cell atlas grown from hiPSCs</h1>
         <p class="lede">Live beating cultures, stained lineages, vessel and cardiac organoids, and the rooms where the work happens.</p>
       </div>
@@ -750,7 +756,7 @@ MODELS = rf"""
 PEOPLE = r"""
     <header class="masthead mast-people">
       <div class="wrap">
-        <p class="kicker">People</p>
+        <p class="kicker">The lab</p>
         <h1>Our team</h1>
         <p class="lede">The lab is a growing group at the intersection of stem-cell models, CRISPR screens, and cardiovascular disease. We value careful experiments, collaboration, and questions that only human cells can answer.</p>
       </div>
@@ -874,8 +880,24 @@ PEOPLE = r"""
     <section>
       <div class="wrap">
         <h2>Lab members</h2>
-        <p class="lede">Named profiles will appear here as people join. Every card below is a role we are actively recruiting.</p>
+        <p class="lede">Current members of the Cardiovascular Precision Medicine Lab. Open roles below remain actively recruiting.</p>
         <div class="team-grid">
+          <a class="person-card person-card-named" href="mailto:rshang@wustl.edu">
+            <div class="person-mark" aria-hidden="true">SR</div>
+            <div class="person-body">
+              <p class="person-role">Postdoc</p>
+              <h3>Renjie Shang</h3>
+              <p>Postdoctoral Research Associate · DOM Cardiology</p>
+            </div>
+          </a>
+          <a class="person-card person-card-named" href="mailto:zhanyu@wustl.edu">
+            <div class="person-mark" aria-hidden="true">IZ</div>
+            <div class="person-body">
+              <p class="person-role">Visiting researcher</p>
+              <h3>Ivy Zhong</h3>
+              <p>Visiting Researcher · DOM Cardiology</p>
+            </div>
+          </a>
           <a class="person-card person-card-open" href="join.html">
             <div class="person-mark" aria-hidden="true">PD</div>
             <div class="person-body">
@@ -917,7 +939,7 @@ PEOPLE = r"""
 JOIN = r"""
     <header class="masthead mast-join">
       <div class="wrap">
-        <p class="kicker">Join</p>
+        <p class="kicker">Open roles</p>
         <h1>Join our team</h1>
         <p class="lede">We are looking for people who want to work at the intersection of stem-cell models, functional genomics, and cardiovascular disease.</p>
       </div>
@@ -936,7 +958,7 @@ JOIN = r"""
 CONTACT = r"""
     <header class="masthead mast-contact">
       <div class="wrap">
-        <p class="kicker">Contact</p>
+        <p class="kicker">St. Louis</p>
         <h1>Get in touch</h1>
         <p class="lede">Write to Dr. Shen, or visit the lab on the WashU Medical Center campus in St. Louis.</p>
       </div>
@@ -1079,7 +1101,7 @@ def build_news() -> str:
     return f"""
     <header class="masthead mast-news">
       <div class="wrap">
-        <p class="kicker">News</p>
+        <p class="kicker">Updates</p>
         <h1>Lab news and media</h1>
         <p class="lede">Documented awards, institutional announcements, and press coverage of Dr. Shen's work. Named team-member news will be added as people join.</p>
       </div>
@@ -1143,7 +1165,7 @@ def build_publications() -> str:
     return f"""
     <header class="masthead mast-pubs">
       <div class="wrap">
-        <p class="kicker">Publications</p>
+        <p class="kicker">2014–2026</p>
         <h1>Publications</h1>
       </div>
     </header>
