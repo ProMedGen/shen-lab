@@ -89,7 +89,7 @@ a:hover {
 
 .brand {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
   color: inherit;
   text-decoration: none;
@@ -114,6 +114,7 @@ a:hover {
   font-size: 1.9rem;
   color: var(--navy);
   font-weight: 600;
+  line-height: 1;
 }
 
 .brand-text span {
@@ -121,21 +122,22 @@ a:hover {
   color: var(--muted);
 }
 
-.brand-washu {
+.brand-text .brand-washu {
   display: block;
   width: auto;
   height: 20px;
-  margin-top: 0.3rem;
+  margin-top: 0.75rem;
 }
 
 .tagline {
   margin-left: auto;
+  align-self: center;
   font-family: Fraunces, Georgia, serif;
   color: var(--blue);
-  font-size: 1.35rem;
+  font-size: clamp(1.05rem, 1.4vw, 1.35rem);
   font-weight: 600;
   text-align: right;
-  max-width: 22ch;
+  white-space: nowrap;
   line-height: 1.3;
 }
 
@@ -1564,6 +1566,10 @@ h2.year {
     padding-bottom: 0.4rem;
   }
 
+  .brand {
+    align-items: center;
+  }
+
   .brand img {
     width: 88px;
     height: 88px;
@@ -1573,7 +1579,7 @@ h2.year {
     font-size: 1.45rem;
   }
 
-  .brand-washu {
+  .brand-text .brand-washu {
     height: 15px;
   }
 
