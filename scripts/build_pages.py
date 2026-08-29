@@ -1085,7 +1085,7 @@ def build_news_teaser() -> str:
       <div class="wrap">
         <div class="section-head">
           <p class="kicker">News</p>
-          <h2>Lab news and coverage</h2>
+          <h2>Lab news and media coverage</h2>
           <p>Institutional announcements, awards, and press on Dr. Shen's work. <a href="news.html">All news</a>.</p>
         </div>
         <div class="news-list">{cards}
