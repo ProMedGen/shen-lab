@@ -27,20 +27,20 @@ Firefly is reserved for:
 
 ## Target assignment (unique + fit)
 
-| Page | Source strategy | Deliverable |
-|---|---|---|
-| Home | upscale `cm-ctnt` → 2K+ wide crop | `banner-home.jpg` |
-| Research | upscale `research-overview` or `endothelial-protocol` crop (not cm-ctnt) | `banner-research.jpg` |
-| Models | upscale `vessel-organoid` | `banner-models.jpg` |
-| Publications | upscale `pericytes` | `banner-pubs.jpg` |
-| Contact | upscale `smc-myh11` | `banner-contact.jpg` |
-| 404 | upscale `epicardial` | `banner-404.jpg` |
-| News | Firefly presentation 16:9 imaginative “media / announcements” | `banner-news.jpg` |
-| People | Firefly production cartoon/素描: Shen from headshot + 5 imagined | `banner-people.jpg` |
-| Join | upscale `tissue-culture` OR distinct recruiting illustration | `banner-join.jpg` |
+| Page | Source strategy | Deliverable | Status |
+|---|---|---|---|
+| Home | Real-ESRGAN `cm-ctnt` → 16:9 | `banner-home.jpg` | done |
+| Research | Real-ESRGAN `fibroblasts` (not annotated overview) | `banner-research.jpg` | done |
+| Models | Real-ESRGAN `vessel-organoid` | `banner-models.jpg` | done |
+| Publications | Real-ESRGAN `pericytes` | `banner-pubs.jpg` | done |
+| Contact | Real-ESRGAN `smc-myh11` | `banner-contact.jpg` | done |
+| 404 | Real-ESRGAN `epicardial` | `banner-404.jpg` | done |
+| Join | Real-ESRGAN `tissue-culture` | `banner-join.jpg` | done |
+| News | Firefly editorial illustration (no forged cells) | `banner-news.jpg` | done |
+| People | Firefly cartoon/素描: Shen headshot + 5 imagined | `banner-people.jpg` | done |
 
-Banner raster target: **≥2560 px on the long edge**, preferably 16:9 cover crops
-for mastheads (`background-size: cover`).
+Banner raster target: **2560×1440** (16:9) cover crops for mastheads.
+
 
 ## Sort note (featured pubs)
 

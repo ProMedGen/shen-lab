@@ -1219,8 +1219,7 @@ nav.year-nav a:focus {
 }
 
 .mast-people {
-  /* Interim: upscaled lab photo until cartoon team banner lands. */
-  background-image: url("../assets/img/banners/banner-people-interim.jpg");
+  background-image: url("../assets/img/banners/banner-people.jpg");
 }
 
 .mast-join {
@@ -1236,8 +1235,7 @@ nav.year-nav a:focus {
 }
 
 .mast-news {
-  /* Interim unique placeholder until Firefly news illustration lands. */
-  background-image: url("../assets/img/banners/banner-pubs.jpg");
+  background-image: url("../assets/img/banners/banner-news.jpg");
 }
 
 .mast-404 {
